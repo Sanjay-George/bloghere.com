@@ -1,0 +1,241 @@
+/*     BASE COLOR  : #c0392b   */
+
+body{
+    font-size : 18px;
+    background : linear-gradient(#c0392b,#88291f 40%,#000 45%,#000 70%);
+    height:100vh;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.section {
+    margin-bottom: 50px;
+}
+.red-btn{
+     background-color : #7b241b !important;
+    
+}
+.black-btn{
+    background-color : #222222 !important;
+    color : white;
+}
+.large-round{
+    font-weight: 200 !important;
+    font-size : 400% !important;
+    color : black;
+    border-radius: 50%;
+    border : 1px solid black;
+    margin-top : 30px;
+}
+/*------------HEADER NAV SECTION---------------*/
+
+nav {
+    background: linear-gradient(to left,#000, #a43125, #000);
+    position: fixed;
+    top : 0px;
+    z-index : 9999;
+}
+nav .nav-wrapper{
+    padding : 0 20px;
+}
+/*---------------MAIN SECTION-------------------*/
+
+main .container{
+    background-color : #f0f0f0;
+    position: absolute;
+    left : 50%;
+    transform: translateX(-50%);
+    top : 20%;
+    height : auto;
+    
+}
+/*--------------LOGIN/SIGNUP SECTION------------*/
+.login{
+    padding : 10px 50px;
+    height : 650px;
+}
+.login h1{
+    margin-top : 40px;
+    font-weight: 200;
+}
+.login h3{
+    font-size : 120%;
+    font-weight : 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+.login h2{
+    font-size : 140%;
+    text-transform: capitalize;
+    font-style : italic;
+    font-weight: 300;
+}
+.tabs-col{
+   padding : 0;
+}
+.tabs{
+    background-color : transparent;
+}
+.tabs .tab a{
+    color : #a43125;
+}
+.tabs .tab a:hover {
+    color : #e2897f;
+}
+.tabs .indicator{
+    background-color : #a43125;
+}
+/*------------MAIM INFO SECTION--------------*/
+
+.main-info{
+    padding : 20px 50px;
+}
+.main-info h3{
+    font-weight: 200;
+}
+.info-points{
+    margin-bottom: 40px;
+}
+.info-points .img-holder{
+    height : 280px !important;
+}
+.info-points img{
+    height : 280px;
+    width : 100%;
+}
+.info-points h4{
+    font-size : 165%;
+    font-style : italic;
+    font-weight: 300;
+    margin : 0 20px;  
+    
+}
+.red-filter{
+    background-color : #88291f;
+    padding : 0 !important;
+    height:  auto !important;
+}
+.red-filter img{
+    opacity : .7;
+    -webkit-filter : grayscale(100%);
+    filter : grayscale(100%);  
+}
+.gray-filter{
+    -webkit-filter : grayscale(100%);
+    filter : grayscale(100%);
+}
+
+.info-nav {
+    margin : 100px 0 50px 0;
+}
+.info-nav a {
+    margin-right : 20px;
+}
+/*--------------BEST BLOG SECTION--------------*/
+.best-blog{
+    padding : 20px 50px;
+}
+
+.best-blog h3{
+    text-transform: uppercase;
+    font-size : 150%;
+    padding-bottom: 5px;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    font-weight: 300;
+    color : #88291f;
+    border-bottom  : 1px solid #88291f;
+}
+
+.blog{
+    border : 1px solid black;
+    margin : 20px 0;
+    border-radius : 10px;
+    padding : 10px 20px !important;
+    height : auto !important;
+}
+
+.blog.red-theme{
+    border-color :#c0392b;
+    color : #7b241b;
+}
+.blog h4{
+    font-size : 150%;
+    text-transform: capitalize;
+}
+.blog h5{
+    font-size : 80%;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    float : left;
+    margin-top : 0px;
+    margin-right : 20px;
+
+}
+
+.blog-info{
+    padding-left : 0 !important;
+}
+
+.blog .material-icons{
+    font-size : 110%;
+    padding-right : 7px;
+}
+.blog-content{
+    padding : 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height:85px; 
+    margin-bottom : 20px;
+}
+.expand{
+    overflow: visible;
+    height : auto !important;
+}
+.blog-info a{
+    color : #888888;
+    cursor : pointer;
+}
+.blog-info a:hover{
+    color : inherit;
+}
+.read-more{
+    background-color : #222222 !important;
+    color : white;
+/*    border : 1px solid black;*/
+    margin-bottom: 10px;
+}
+.red-theme .read-more{
+/*    border-color : #7b241b;*/
+    background-color : #7b241b !important;
+
+}
+/*------------SEARCH BLOG SECTION ------------------*/
+.search-blog input{
+    font-size : 200%;
+    color : #ada9a9;
+}
+
+/*-----------typing effect css-------------------*/
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}

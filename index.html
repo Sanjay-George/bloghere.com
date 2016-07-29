@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        
+        <header>
+           <nav class='z-depth-3'>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo left">bloghere.com</a>
+              <ul id="nav-mobile" class="right">
+                <li class='waves-effect waves-light'><a href="#">Login</a></li>
+                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>
+                <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </nav>
+            
+        </header>
+        
+        <main>
+           
+           <div class='container z-depth-5'>
+           
+                <div class='row login section'>
+                    <h1 class='center'>Welcome to bloghere.com</h1>
+                    <h3 class='center'>Login / Sign up to continue</h3>
+                    
+           
+                    <div class="col s12 tabs-col">
+                      <ul class="tabs">
+                        <li class="tab col s6"><a href="#login">Login</a></li>
+                        <li class="tab col s6"><a class="active" href="#signup">Sign Up</a></li> 
+                      </ul>
+                    </div>
+                    <!-- LOGIN -->
+                    <div id="login" class="col s12">
+                        <div class="row">
+                            <form name='login' id='login' class="col s12 l8 offset-l2">
+                             <div class="row">
+                                <div class="input-field col s12">
+                                  <input id="email" type="email" class="validate">
+                                  <label for="email">Email</label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12">
+                                  <input id="password" type="password" class="validate">
+                                  <label for="password">Password</label>
+                                </div>
+                              </div>
+                              <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 black-btn">login</a></div>
+                            </form>
+                        </div>    
+                    </div>
+                    <!-- SIGNUP -->
+                    <div class="col s12 l8 offset-l2">
+                        <div class="row">
+                            <form name='signup' id='signup' class="col s12">
+                              <div class="row">
+                                <div class="input-field col s12">
+                                  <input id="first_name" type="text" class="validate">
+                                  <label for="first_name">Username</label>
+                                </div>
+                              </div>
+                             <div class="row">
+                                <div class="input-field col s12">
+                                  <input id="email" type="email" class="validate">
+                                  <label for="email">Email</label>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="input-field col s12">
+                                  <input id="password" type="password" class="validate">
+                                  <label for="password">Password</label>
+                                </div>
+                              </div>
+                              <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 black-btn">sign up</a></div>
+                            </form>
+                    </div>
+                </div>
+                <!-- see more button -->
+<!--                <div class='col l12 center'><a id='js-go-main-info' href=""><i class='material-icons large-round z-depth-2'>keyboard_arrow_down</i></a></div>-->
+<!--               <h2 class=' col l12 center'>Scroll down to see more</h2>-->
+                
+               </div>
+               
+               
+               <div class='row main-info section'>
+                   <div class='col l12 info-points valign-wrapper'>
+                       <div class='col l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-1.jpg"></div>
+                       <div class='col l7'><h4>Search for any topic that you want to</h4></div>
+                   </div>
+                   <div class='col l12 info-points valign-wrapper'>
+                       <div class='col l7 right-align'><h4>Click on bloggers to see all of their blogs</h4></div>
+                       <div class='col l5 img-holder'><img class='responsive-img gray-filter' src="images/main-photo-2.jpg"> </div>
+                   </div>
+                    <div class='col l12 info-points valign-wrapper'>
+                       <div class='col l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-3.jpg"></div>
+                       <div class='col l7'><h4>Upvote your favourite blogs</h4></div>
+                   </div>
+                   <div class='col l12 info-nav'>
+                       <h3 class='center'>Get started now or browse for more </h3>
+                        <div class='col l12 center'>
+                            <a class="waves-effect waves-light btn z-depth-1 red-btn hoverable">Wanna BLog</a>
+                            <a class="waves-effect waves-light btn z-depth-1 black-btn hoverable">Read blogs</a>
+                        </div>
+                         
+                   </div>
+                
+                   
+               </div>
+               <!-- from here hide in the beginning -->
+               <!-- Add asynchoronous loading later -->
+               <div class= 'row best-blog section'>
+                    <div class='col l12'>
+                       <h3>the best ones</h3>
+                    </div>
+                    
+                    <div class='col l12 blog z-depth-1'>
+                       <h4>Name of the blog</h4>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><i class="material-icons">person</i></span>
+                           <span><a>Total buttwad</a></span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><i class="material-icons">watch_later</i></span>
+                            <span>22/07/2016</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">thumb_up</i></a></span>
+                           <span>50</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">thumb_down</i></a></span>
+                            <span>10</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-content'>
+                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can. But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.</p>
+                       </div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                   </div> 
+                      
+                    
+                    <div class='col l12 blog red-theme z-depth-1'>
+                       <h4>Name of the blog</h4>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><i class="material-icons">person</i></span>
+                           <span><a>Total buttwad</a></span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><i class="material-icons">watch_later</i></span>
+                            <span>22/07/2016</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">thumb_up</i></a></span>
+                           <span>50</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">thumb_down</i></a></span>
+                            <span>10</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-content'>
+                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
+                       </div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                   </div>
+                   
+               </div>
+                    
+                <div class ='row search-blog section'>
+                    <div class='col l12'>
+                        <form name='search' id='search' class="col s12">
+                          <div class="col l8 offset-l2 valign-wrapper">
+                                <div class="input-field col l11">
+                                  <input id="search" class='element' type="text">
+                                  
+                                </div>
+                                <div class='col l1 center'><a class="waves-effect waves-light btn z-depth-2 black"> <i class="material-icons">search</i></a></div>
+                          </div>
+                        </form>   
+                    </div>   
+                </div>
+                    
+                
+                     
+           </div>
+            
+        </main>
+        
+        <footer>
+            dafjldafj
+        </footer>
+    
+    
+     
+     
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script src="js/typed.js"></script>
+
+        <script>
+            
+            // FOR EXPANDING/COLLAPSING BLOG CONTENT
+            $('.js-expand').click(function(){
+               $(this).parents().siblings('.blog-content').toggleClass('expand');
+                
+                if ($(this).parents().siblings('.blog-content').hasClass('expand'))
+                    $(this).text("Collapse");
+                else
+                    $(this).text("Read More");
+            });
+            
+           // WHEN DOC READY
+            $(document).ready(function(){
+                // FOR SELECTING TABS
+                $('ul.tabs').tabs();
+            });
+            
+            // TYPING EFFECT
+            $(function(){
+              $(".element").typed({
+                strings: ["Search for any topic",'Technology','Music'],
+                typeSpeed: 100,
+                startDelay : 100, 
+                loop : true,
+                backDelay : 1000,
+                backspeed : 500
+              });
+          });
+            // stop effect on focus in
+            $('.element').focusin(function(){
+                $(this).typed({
+                    strings : ['']
+                });
+                $(this).val('');
+                
+            });
+        
+      </script>
+    </body>
+</html>
