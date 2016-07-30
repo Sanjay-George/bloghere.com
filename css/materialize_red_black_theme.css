@@ -1,0 +1,99 @@
+/* BASE COLOR : #88291f */
+
+
+
+/*-------------MATERIALIZE CUSTOM STYLING-----------------*/
+
+
+.tabs a{
+    color:black !important;
+}
+.tabs .indicator{
+    background-color:#88291f ;
+}
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #88291f;
+  box-shadow: 0 1px 0 0 #88291f;
+}
+
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=url]:focus:not([readonly]) + label,
+input[type=time]:focus:not([readonly]) + label,
+input[type=date]:focus:not([readonly]) + label,
+input[type=datetime]:focus:not([readonly]) + label,
+input[type=datetime-local]:focus:not([readonly]) + label,
+input[type=tel]:focus:not([readonly]) + label,
+input[type=number]:focus:not([readonly]) + label,
+input[type=search]:focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #000;
+}
+
+.picker__weekday-display {
+    background-color:rgba(0, 0, 0, 0.81);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.picker__date-display{
+    background-color:#88291f;
+}
+
+.picker__day.picker__day--today{
+    color:#88291f;
+}
+
+.picker__close, .picker__today{
+    color:#88291f;
+}
+
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+    background-color:rgba(0, 0, 0, 0.81);
+}
+
+.switch label input[type=checkbox]:checked+.lever{
+    background-color:#88291f;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after{
+    background-color:#383420;
+}
+
+[type="checkbox"]:checked+label:before{
+    border-right: 2px solid #88291f ;
+    border-bottom: 2px solid #88291f ;
+}
+
+.material-tooltip {
+  padding: 5px 3px !important;
+  font-size: 70%;
+  z-index: 2000;
+  background-color: transparent;
+  border-radius: 2px;
+  color: #fff;
+  min-height:auto !important;
+  line-height: 100%;
+
+}
+
+.dropdown-content li>a, .dropdown-content li>span{
+
+    color: #88291f;
+}
+/*---------------------------------------------------------------*/

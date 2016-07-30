@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel='stylesheet' href="css/materialize_red_black_theme.css">
+        <link rel="stylesheet" href="css/blogger.css">
+    </head>
+
+    <body>
+        
+        <header>
+           <nav class='z-depth-3'>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo left">bloghere.com</a>
+              <ul id="nav-mobile" class="right">
+                <li class='waves-effect waves-light'><a href="#">Home</a></li>
+                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>
+                <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </nav>
+            
+        </header>
+        
+        <main>
+           
+           <div class='container z-depth-5'>
+           
+               <div class='row profile-header'>
+                   <div class='col l12  card-panel'>
+                       <h1>Dan Brown</h1>
+                       <h3>danbrown@email.com</h3>
+                   </div>
+               </div>
+               
+               <div id='all-blogs' class= 'row best-blog section'>
+                    
+                    
+                    <div class='col l12 blog z-depth-1'>
+                       <h4>Name of the blog</h4>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><i class="material-icons">person</i></span>
+                           <span><a>Total buttwad</a></span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><i class="material-icons">watch_later</i></span>
+                            <span>22/07/2016</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">thumb_up</i></a></span>
+                           <span>50</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">thumb_down</i></a></span>
+                            <span>10</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-content'>
+                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can. But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.
+                           But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.</p>
+                       </div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                   </div> 
+                      
+                    
+                    <div class='col l12 blog red-theme z-depth-1'>
+                       <h4>Name of the blog</h4>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><i class="material-icons">person</i></span>
+                           <span><a>Total buttwad</a></span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><i class="material-icons">watch_later</i></span>
+                            <span>22/07/2016</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">thumb_up</i></a></span>
+                           <span>50</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">thumb_down</i></a></span>
+                            <span>10</span>
+                        </h5>
+                       </div>
+                       <div class='col l12 blog-content'>
+                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
+                       </div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                   </div>
+                   
+               </div>
+                    
+                
+                    
+                
+                     
+           </div>
+            
+        </main>
+        
+
+  
+    
+     
+     
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/typed.js"></script>
+
+        <script>
+            
+            // FOR EXPANDING/COLLAPSING BLOG CONTENT
+            $('.js-expand').click(function(){
+               $(this).parents().siblings('.blog-content').toggleClass('expand');
+                
+                if ($(this).parents().siblings('.blog-content').hasClass('expand'))
+                    $(this).text("Collapse");
+                else
+                    $(this).text("Read More");
+            });
+            
+           // WHEN DOC READY
+            $(document).ready(function(){
+                // FOR SELECTING TABS
+                $('ul.tabs').tabs();
+            });
+            
+        
+      </script>
+    </body>
+</html>
