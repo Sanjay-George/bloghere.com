@@ -28,10 +28,25 @@
            
            <div class='container z-depth-5'>
            
-               <div class='row profile-header'>
-                   <div class='col l12  card-panel'>
-                       <h1>Dan Brown</h1>
-                       <h3>danbrown@email.com</h3>
+               <div class='row profile-header '>
+                   <div class='col l12  card-panel z-depth-0 valign-wrapper'>
+                       <div id='profile-info' class='col l8'>
+                           <h1>Dan Brown</h1>
+                           <h3>danbrown@email.com</h3>
+                           <h4>Germany</h4>
+                       </div>
+                       <div id='profile-options' class='col l4'>
+                           <div class='col l12'>
+                               <div class='col l12 card z-depth-1 hoverable'>
+                                   <a><span><i class="material-icons">edit</i></span>
+                                   <span>Edit Profile</span></a>
+                               </div>
+                               <div class='col l12 card z-depth-1 hoverable'>
+                                   <a><span><i class="material-icons">https</i></span>
+                                   <span>Change Password</span></a>
+                               </div>
+                           </div>    
+                       </div>
                    </div>
                </div>
                
@@ -60,11 +75,20 @@
                             <span>10</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can. But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.
-                           But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.</p>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">edit</i></a></span>
+                           <span>edit</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">delete</i></a></span>
+                            <span>delete</span>
+                        </h5>
                        </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                       <div class='col l12 blog-content'>
+                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. Therhis rights to publish anything new as well will delete thything new as well will delete that particular bl as well will delete that particular blog.</p>
+                       </div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
                    </div> 
                       
                     
@@ -90,10 +114,20 @@
                             <span>10</span>
                         </h5>
                        </div>
+                       <div class='col l12 blog-info'>
+                        <h5 class='valign-wrapper'>
+                           <span><a><i class="material-icons">edit</i></a></span>
+                           <span>edit</span>
+                        </h5>
+                        <h5 class='valign-wrapper'>
+                            <span><a><i class="material-icons">delete</i></a></span>
+                            <span>delete</span>
+                        </h5>
+                       </div>
                        <div class='col l12 blog-content'>
                            <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
                        </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
+                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
                    </div>
                    
                </div>
@@ -105,6 +139,9 @@
            </div>
             
         </main>
+        
+        <!-- FLOATING ADD NEW BUTTON -->
+        <a class="btn-floating btn-large waves-effect waves-light red z-depth-5"><i class="material-icons">add</i></a>
         
 
   
@@ -123,9 +160,9 @@
                $(this).parents().siblings('.blog-content').toggleClass('expand');
                 
                 if ($(this).parents().siblings('.blog-content').hasClass('expand'))
-                    $(this).text("Collapse");
+                    $(this).text("Show less");
                 else
-                    $(this).text("Read More");
+                    $(this).text("Show More");
             });
             
            // WHEN DOC READY

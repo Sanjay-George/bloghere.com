@@ -2,7 +2,7 @@
 
 body{
     font-size : 18px;
-    background : linear-gradient(#c0392b,#88291f 40%,#000 45%,#000 70%);
+    background : linear-gradient(#c0392b,#88291f 40%,#4a4646 45%,#2f2f2f 70%);
     height:100vh;
     background-position: center;
     background-attachment: fixed;
@@ -43,14 +43,55 @@ nav .nav-wrapper{
 
 main .container{
     background-color : #f0f0f0;
-/*
-    position: absolute;
-    left : 50%;
-    transform: translateX(-50%);
-    top : 20%;
-*/
     height : auto;
     
+}
+/*-----------profile header section-----------*/
+.profile-header{
+    margin-top : 200px;
+    margin-left : 0 !important;
+    margin-right : 0 !important;
+    border-bottom : 1px solid black;
+}
+.profile-header .card-panel{
+    padding : 20px 50px;
+    background-color : transparent;
+}
+.profile-header h1{
+    font-size : 300%;
+    font-weight: 200;
+    text-transform: capitalize;
+    letter-spacing: 1px ;
+}
+.profile-header h3{
+    font-size : 130%;
+    font-weight: 400;
+    font-style : italic;
+}
+.profile-header h4{
+    font-size : 100%;
+    text-transform: uppercase;
+}
+#profile-options{
+    font-size : 85%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#profile-options a{
+    color : #c0392b;
+    cursor : pointer;
+}
+#profile-options .material-icons{
+    font-size : 100%;
+    margin : 0 3px;
+    color : #88291f;
+}
+#profile-options .card{
+    background-color : transparent;
+    border : 1px solid #c0392b;
+    padding: 5px;
+    display : flex;
+    align-items: center;
 }
 
 /*--------------BEST BLOG SECTION--------------*/
@@ -131,4 +172,12 @@ main .container{
 /*    border-color : #7b241b;*/
     background-color : #7b241b !important;
 
+}
+
+/*-----------floating button---------------*/
+.btn-floating {
+    position : fixed;
+    bottom : 30px;
+    right : 18vw;
+    background-color : #c0392b !important;
 }
