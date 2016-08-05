@@ -176,7 +176,7 @@ main .container{
 
 /*-----------floating button---------------*/
 .btn-floating {
-    position : fixed;
+/*    position : fixed;*/
     bottom : 30px;
     right : 18vw;
     background-color : #c0392b !important;
@@ -192,6 +192,7 @@ main .container{
     left:0px;
     background:rgba(0,0,0,0.75);
     z-index:9999;
+    
 }
 .popup h5{
     font-size:100%;
@@ -249,4 +250,7 @@ main .container{
     background:rgba(0,0,0,1);
     text-decoration:none;
 }
-
+/*----------EDIT BLOG POPUP--------------------*/
+#edit-blog textarea{
+    font-size : 100%;
+}

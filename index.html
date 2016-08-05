@@ -225,19 +225,9 @@
                    </div>  
                   </div>
                </div>
-             <!--  DELETE ACCOUNT POPUP-->
-            <div class="popup" data-popup="delete-account">
-                <div class="popup-inner card-panel">
-                    <h5>Delete Account</h5>
-                    <p>Are you sure you want to delete your account ?</p>
-                    
-                    <!-- ADD DELETE FUNCTIONALITY TO THIS BUTTON BELOW-->
-                    <a class='btn blue darken-4 z-depth-1 left' href="#">Delete</a>
-                    
-                    <a class='btn white z-depth-1 black-text left ' data-popup-close="delete-account" href="#">Cancel</a>
-                    <a class="popup-close" data-popup-close="delete-account" href="#">x</a>
-                </div>
-            </div>       
+               
+            
+           
                 
                      
            </div>
@@ -304,43 +294,7 @@
                 offset: '50%'
             });*/
             
-            /*-------------DELETE ACC POPUP -----------------*/
-
-
-            $(function() {
-                    //----- OPEN
-                    $('[data-popup-open]').on('click', function(e)  {
-                        var targeted_popup_class = $(this).attr('data-popup-open');
-                        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-                        e.preventDefault();
-                    });
-
-                    //----- CLOSE BUTTONS
-                    $('[data-popup-close]').on('click', function(e)  {
-                        var targeted_popup_class = $(this).attr('data-popup-close');
-                        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-                        e.preventDefault();
-                    });
-
-                    //------ ESCAPE KEY PRESS 
-                    $(document).keyup(function(e) {
-                        if (e.keyCode == 27) 
-                        {
-                            var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
-                            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-                        }
-                    });
-
-                    //------ CLICK ANYWHERE ELSE
-                    $('.popup').click(function(){
-                        var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
-                        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);    
-                    })
-
-
-                });
+           
 
       </script>
      
