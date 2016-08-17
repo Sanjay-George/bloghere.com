@@ -28,6 +28,13 @@ body{
     margin-top : 30px;
 }
 
+.form-error{
+    font-size : 90%;
+    font-style : italic;
+    margin-top : 20px;
+    color : #88291f;
+}
+
 /*------------HEADER NAV SECTION---------------*/
 
 nav {
@@ -58,6 +65,7 @@ main .container{
 .login h1{
     margin-top : 40px;
     font-weight: 200;
+    font-size : 335%;
 }
 .login h3{
     font-size : 120%;
@@ -99,10 +107,17 @@ main .container{
 }
 .info-points .img-holder{
     height : 280px !important;
+    overflow : hidden;
+    padding:0;
 }
 .info-points img{
     height : 280px;
-    width : 100%;
+    min-width : 100%;
+    transform: scale(1);
+    transition : transform 3s;
+}
+.info-points img:hover{
+    transform: scale(1.2) !important;
 }
 .info-points h4{
     font-size : 165%;

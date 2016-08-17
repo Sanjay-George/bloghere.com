@@ -1,3 +1,81 @@
+<?php
+    // hide all warnings here
+    error_reporting(0);  
+
+    session_start();
+
+    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    $error = "";
+    if (mysqli_connect_error()){
+        die('Unable to connect to the database');
+    }
+
+    // SIGN UP SECTION 
+    if (array_key_exists('signup', $_POST)){
+//        print_r($_POST);  // comment this later
+        
+        
+        if (!$_POST['email']){
+            $error = "One or more fields are empty";
+        }
+        if (!$_POST['username']){
+            $error = "One or more fields are empty";
+        }
+        if (!$_POST['password']){
+            $error = "One or more fields are empty";
+        }
+        if ($error != "")
+        {
+            
+        }
+        else{
+            // check if email is taken DB access required
+            $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
+            
+            $result = mysqli_query($link, $query);
+            
+            if (mysqli_num_rows($result) != 0){
+                $error = "Email id already taken";
+            } else{
+                // INSERT ALL VALUES INTO DB
+                $query = "INSERT INTO `bloggers` (`username`, `email`, `password`) values ( '".mysqli_real_escape_string($link, $_POST['username'])."', '".mysqli_real_escape_string($link, $_POST['email'])."', '".mysqli_real_escape_string($link, $_POST['password'])."')";
+                
+                if (!mysqli_query($link, $query)){
+                    $error = "Sign up failed ! Please try again later.";
+                }
+                else{
+                    $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
+                    $result = mysqli_query($link, $query);
+                    $row = mysqli_fetch_array($result);
+                    $id = $row['blogger_id'];
+                    
+                    //HASH PASSWORD
+                    $query = "UPDATE `bloggers` SET password= '".md5(md5($id).$_POST['password'])."' WHERE blogger_id =".$id." LIMIT 1";
+                    mysqli_query($link, $query);
+                    
+                    //setting cookie and session
+                    $_SESSION["id"] = $id;
+                    setcookie("id", $id, time() + 60*60*24*15);
+                    print_r($_SESSION);
+                    print_r($_COOKIE);
+                    
+                    $error = "Sign up successful!";  // do page redirect to blogger.php
+                    
+                    
+                    
+                    
+                }
+            }
+            
+        }
+    }
+
+    // LOGIN SECTION
+    
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,8 +93,7 @@
             <div class="nav-wrapper">
               <a href="#" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a href="#">Login</a></li>
-                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>
+                <li class='waves-effect waves-light'><a href="#">Login / Sign Up</a></li>
                 <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
               </ul>
             </div>
@@ -35,53 +112,57 @@
            
                     <div class="col s12 tabs-col">
                       <ul class="tabs">
-                        <li class="tab col s6 z-depth-1"><a href="#login">Login</a></li>
+                        <li class="tab col s6 z-depth-1"><a  href="#login">Login</a></li>
                         <li class="tab col s6 z-depth-1"><a class="active" href="#signup">Sign Up</a></li> 
                       </ul>
                     </div>
                     <!-- LOGIN -->
+<!--
                     <div class="col s12 l8 offset-l2">
                         <div class="row">
-                            <form name='login' id='login' class="col s12 ">
+                            <form name='login' method='post' id='login' class="col s12">
                              <div class="row">
                                 <div class="input-field col s12">
-                                  <input id="email" type="email" class="validate">
+                                  <input id="email" type="email" name="email" class="validate" autocomplete="email">
                                   <label for="email">Email</label>
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="input-field col s12">
-                                  <input id="password" type="password" class="validate">
+                                  <input id="password" type="password" name="password" class="validate">
                                   <label for="password">Password</label>
                                 </div>
                               </div>
-                              <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 black-btn">login</a></div>
+                                <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
                             </form>
                         </div>    
                     </div>
+-->
                     <!-- SIGNUP -->
                     <div class="col s12 l8 offset-l2">
                         <div class="row">
-                            <form name='signup' id='signup' class="col s12">
+                            <form method="post" name='signup' id='signup' class="col s12" novalidate>
                               <div class="row">
                                 <div class="input-field col s12">
-                                  <input id="first_name" type="text" class="validate">
-                                  <label for="first_name">Username</label>
+                                  <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $_POST['username']; ?>'>
+                                  <label for="username">Username</label>
                                 </div>
                               </div>
                              <div class="row">
                                 <div class="input-field col s12">
-                                  <input id="email" type="email" class="validate">
+                                  <input id="email" type="email" name="email" class="validate" autocomplete="email" required value='<?php echo $_POST['email']; ?>'>
                                   <label for="email">Email</label>
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="input-field col s12">
-                                  <input id="password" type="password" class="validate">
+                                  <input id="password" type="password" name='password' class="validate" required>
                                   <label for="password">Password</label>
                                 </div>
                               </div>
-                              <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 black-btn">sign up</a></div>
+                              <div class='col l12 center'><button name='signup' class="waves-effect waves-light btn z-depth-2 black-btn">Sign Up</button></div>
+                              
+                              <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                     </div>
                 </div> 

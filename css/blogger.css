@@ -2,7 +2,7 @@
 
 body{
     font-size : 18px;
-    background : linear-gradient(#c0392b,#88291f 40%,#4a4646 45%,#2f2f2f 70%);
+    background : linear-gradient(#c0392b,#88291f 40%,#000 45%,#000 70%);
     height:100vh;
     background-position: center;
     background-attachment: fixed;
@@ -95,6 +95,7 @@ main .container{
 }
 
 /*--------------BEST BLOG SECTION--------------*/
+/*-------same styling used here for blogs section-----*/
 .best-blog{
     padding : 20px 50px;
 }

@@ -1,3 +1,21 @@
+<?php
+    
+    session_start();
+
+    if (array_key_exists("id", $_COOKIE)){
+        $_SESSION['id'] = $_COOKIE['id'];
+    }
+
+    if (array_key_exists("id", $_SESSION)){
+        echo 'HI there';  
+    }
+    else{
+        header("Location : index.php");
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,9 +33,9 @@
             <div class="nav-wrapper">
               <a href="index.html" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a href="index.html">Home</a></li>
+                <li class='waves-effect waves-light'><a href="index.php?logout=0">Home</a></li>
                 <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>
-                <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
+                <li class='waves-effect waves-light'><a href="index.php?logout=1">Log Out</a></li>
               </ul>
             </div>
           </nav>

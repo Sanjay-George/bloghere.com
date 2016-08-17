@@ -1,0 +1,35 @@
+body{
+    font-size : 18px;
+   
+}
+
+.profile-header h4{
+    font-size : 200%;
+    font-weight: 300;
+}
+
+.bloggers-list{
+    padding : 20px 50px;
+}
+.bloggers-list h5{
+    border-bottom : 1px solid #807b7b;
+    color : #807b7b;
+    margin-bottom: 20px;
+    font-size : 120%;
+}
+
+.bloggers-list label{
+    font-size : 100%;
+    color : #000;
+}
+
+.blogger-info{
+    margin : 2px 0;
+    padding : 10px !important;
+    background-color : #fafafa;
+}
+
+.update-btn{
+    margin-top : 40px;
+    margin-bottom : 20px;
+}
