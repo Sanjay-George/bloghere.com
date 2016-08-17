@@ -10,7 +10,7 @@
         echo 'HI there';  
     }
     else{
-        header("Location : index.php");
+        header("Location: index.php");
     }
 
 ?>
@@ -33,8 +33,8 @@
             <div class="nav-wrapper">
               <a href="index.html" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a href="index.php?logout=0">Home</a></li>
-                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>
+                <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
+<!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->
                 <li class='waves-effect waves-light'><a href="index.php?logout=1">Log Out</a></li>
               </ul>
             </div>

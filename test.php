@@ -28,7 +28,7 @@ print_r($_SESSION);
     if (array_key_exists("id", $_SESSION)){
         echo "You are logged in";
     }else{
-        header("Location : index.php");
+        header("Location: index.php");
     }
 
 ?>

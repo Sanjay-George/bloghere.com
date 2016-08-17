@@ -10,11 +10,18 @@
         die('Unable to connect to the database');
     }
 
+    // LOGOUT USER
+    if (array_key_exists("logout", $_GET)){
+        session_unset();
+        setcookie("id", "", time()-60*60*24);
+        $_COOKIE["id"] = "";
+    }
+    
+    
+
     // SIGN UP SECTION 
     if (array_key_exists('signup', $_POST)){
-//        print_r($_POST);  // comment this later
-        
-        
+
         if (!$_POST['email']){
             $error = "One or more fields are empty";
         }
@@ -56,13 +63,8 @@
                     //setting cookie and session
                     $_SESSION["id"] = $id;
                     setcookie("id", $id, time() + 60*60*24*15);
-                    print_r($_SESSION);
-                    print_r($_COOKIE);
-                    
-                    $error = "Sign up successful!";  // do page redirect to blogger.php
-                    
-                    
-                    
+
+                    header("Location: blogger.php"); 
                     
                 }
             }
@@ -84,8 +86,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     </head>
-
+    
     <body>
         
         <header>
@@ -93,7 +96,7 @@
             <div class="nav-wrapper">
               <a href="#" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a href="#">Login / Sign Up</a></li>
+                <li class='waves-effect waves-light'><a id='nav-change-option' href="#">Login / Sign Up</a></li>
                 <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
               </ul>
             </div>
@@ -105,7 +108,7 @@
            
            <div class='container z-depth-5'>
            
-                <div class='row login section'>
+                <div id='login-form' class='row login section'>
                     <h1 class='center'>Welcome to bloghere.com</h1>
                     <h3 class='center'>Login / Sign up to continue</h3>
                     
@@ -168,7 +171,7 @@
                 </div> 
                </div>
                
-               <div id='js-show-main-info'></div>
+    
                               
                <div  class='row main-info section'>
                    <div class='col l12 info-points valign-wrapper'>
@@ -191,11 +194,29 @@
                         </div>
                          
                    </div>
-                
-                   
                </div>
-               <!-- from here hide in the beginning -->
-               <!-- Add asynchoronous loading later -->
+               
+            <?php
+        
+                // visiting home page still logged in
+                if (array_key_exists("loggedin", $_GET)){
+                    // hide sign up form 
+                    // show profile instead of home in navbar
+                    $error  = 'logged in'; 
+            ?>
+                        
+               <script>$('#login-form').hide();
+                   $('.main-info .info-nav').hide();
+                   $('.main-info').css('padding-top','100px');
+                   $('#nav-change-option').text("Profile Page");
+                   $('#nav-change-option').attr("href", "blogger.php");
+               </script>
+            <?php
+                    
+                }
+
+            ?>
+               
                <div id='best-blog' class= 'row best-blog section'>
                     <div class='col l12'>
                        <h3>the best ones</h3>
@@ -316,11 +337,11 @@
         </main>
         
 
-  
+        
     
      
      
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
         <script src="js/jquery.waypoints.min.js"></script>
         <script src="js/typed.js"></script>
@@ -363,17 +384,9 @@
                 
             });
             
-            // WAYPOINTS LOADING CONTENT
-            /*$('#js-show-main-info').waypoint(function(direction) {
-                if (direction == "down") {
-                } 
-                    else {
-                    $('.tab-carousel').removeClass('fix-section');
-                }
-
-            }, {
-                offset: '50%'
-            });*/
+            
+            
+            
             
            
 

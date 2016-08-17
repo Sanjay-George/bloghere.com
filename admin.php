@@ -16,7 +16,7 @@
             <div class="nav-wrapper">
               <a href="#" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a href="index.php?logout=0">Home</a></li>
+                <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
                 <li class='waves-effect waves-light'><a href="index.php?logout=1">Log Out</a></li>
               </ul>
             </div>
