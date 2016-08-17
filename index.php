@@ -16,6 +16,9 @@
         setcookie("id", "", time()-60*60*24);
         $_COOKIE["id"] = "";
     }
+    else if((array_key_exists('id', $_SESSION)  || array_key_exists('id', $_COOKIE)) && $_GET['loggedin'] != 1 ) {
+        header('Location: blogger.php');
+    }
     
     
 
@@ -96,7 +99,7 @@
             <div class="nav-wrapper">
               <a href="#" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a id='nav-change-option' href="#">Login / Sign Up</a></li>
+                <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="#">Login / Sign Up</a></li>
                 <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
               </ul>
             </div>
@@ -115,12 +118,11 @@
            
                     <div class="col s12 tabs-col">
                       <ul class="tabs">
-                        <li class="tab col s6 z-depth-1"><a  href="#login">Login</a></li>
+                        <li class="tab col s6 z-depth-1"><a href="#login">Login</a></li>
                         <li class="tab col s6 z-depth-1"><a class="active" href="#signup">Sign Up</a></li> 
                       </ul>
                     </div>
                     <!-- LOGIN -->
-<!--
                     <div class="col s12 l8 offset-l2">
                         <div class="row">
                             <form name='login' method='post' id='login' class="col s12">
@@ -140,7 +142,6 @@
                             </form>
                         </div>    
                     </div>
--->
                     <!-- SIGNUP -->
                     <div class="col s12 l8 offset-l2">
                         <div class="row">
@@ -189,8 +190,8 @@
                    <div class='col l12 info-nav'>
                        <h3 class='center'>Get started now or browse for more </h3>
                         <div class='col l12 center'>
-                            <a href='#signup' class="waves-effect waves-light btn z-depth-1 red-btn hoverable">Wanna BLog</a>
-                            <a href='#best-blog' class="waves-effect waves-light btn z-depth-1 black-btn hoverable">Read blogs</a>
+                            <a class="js-scrollto-login waves-effect waves-light btn z-depth-1 red-btn hoverable">Wanna BLog</a>
+                            <a id='js-scrollto-blogs' href='#best-blog' class="waves-effect waves-light btn z-depth-1 black-btn hoverable">Read blogs</a>
                         </div>
                          
                    </div>
@@ -199,10 +200,10 @@
             <?php
         
                 // visiting home page still logged in
-                if (array_key_exists("loggedin", $_GET)){
+                if ((array_key_exists('id', $_SESSION)  || array_key_exists('id', $_COOKIE)) && array_key_exists("loggedin", $_GET)){
                     // hide sign up form 
                     // show profile instead of home in navbar
-                    $error  = 'logged in'; 
+                    
             ?>
                         
                <script>$('#login-form').hide();
@@ -382,6 +383,19 @@
                 });
                 $(this).val('');
                 
+            });
+            
+            //SCROLL ON CLICKING BUTTONS
+            $(".js-scrollto-login").click(function(e) {
+                $('html, body').animate({
+                    scrollTop: $("#login-form").offset().top
+                }, 2000);
+            });
+            
+            $("#js-scrollto-blogs").click(function() {
+                $('html, body').animate({
+                    scrollTop: $("#best-blog").offset().top
+                }, 1500);
             });
             
             

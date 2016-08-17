@@ -8,6 +8,7 @@
 
     if (array_key_exists("id", $_SESSION)){
         echo 'HI there';  
+        // do other stuff on this page with the session variable
     }
     else{
         header("Location: index.php");
@@ -31,7 +32,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="index.html" class="brand-logo left">bloghere.com</a>
+              <a href="index.php?loggedin=1" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
 <!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->
