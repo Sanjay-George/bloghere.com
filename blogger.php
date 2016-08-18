@@ -22,6 +22,23 @@
         $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
         $result = mysqli_query($link, $query);
         $row = mysqli_fetch_array($result);
+        
+        // ON ANY SUMBIT BUTTON CLICK
+        if (array_key_exists("submit", $_POST)){
+            print_r($_POST);
+            // EDIT PROFILE POPUP
+            if (array_key_exists('edit-prof-pop', $_POST)){
+                $query = "UPDATE `bloggers` SET email='".$_POST['email']."', username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";
+                mysqli_query($link, $query);
+                header("Location: blogger.php");
+            }
+            // CHANGE PASSWORD POPUP
+            if (array_key_exists('change-pass-pop', $_POST)){
+                $query = "UPDATE `bloggers` SET password='".md5(md5($id).$_POST['password'])."' WHERE blogger_id = ".$id."";
+                mysqli_query($link, $query);
+                header("Location: blogger.php");
+            }
+        }
        
         
     }
@@ -145,7 +162,7 @@
                        </div>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
-                           <span><a href='edit.html'><i class="material-icons">edit</i></a></span>
+                           <span><a href='edit.php'><i class="material-icons">edit</i></a></span>
                            <span>edit</span>
                         </h5>
                         <h5 class='valign-wrapper'>
@@ -173,8 +190,8 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-                <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Edit Profile'><i class="material-icons">edit</i></a></li>
-                <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Change Password'><i class="material-icons">https</i></a></li>
+                <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Edit Profile' data-popup-open="edit-profile"><i class="material-icons">edit</i></a></li>
+                <li><a  class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Change Password' data-popup-open="change-password"><i class="material-icons">https</i></a></li>
                 <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Add Blog'><i class="material-icons">add</i></a></li>
             </ul>
           </div>
@@ -193,7 +210,63 @@
                 <a class='btn white z-depth-1 black-btn left ' data-popup-close="delete-blog" href="#">Cancel</a>
                 <a class="popup-close" data-popup-close="delete-blog" href="#">x</a>
             </div>
-        </div>  
+        </div> 
+        
+        <!-- EDIT PROFILE POPUP -->
+        <div class="popup" data-popup="edit-profile">
+            <div class="popup-inner card-panel">
+                <h5>Edit profile</h5>
+                
+                <form name='edit-profile' method='post'>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $row['username']; ?>'>
+                          <label for="username">Username</label>
+                        </div>
+                      </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                          <input id="email" type="email" name="email" class="validate" autocomplete="email" required value='<?php echo $row['email']; ?>'>
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input id="country" name='country' type="text" class="validate" autocomplete='name' value='<?php echo $row['country']; ?>'>
+                          <label for="country">Country</label>
+                        </div>
+                      </div>
+                    
+                    <input type="hidden" name='edit-prof-pop'>
+                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
+                            
+                </form>
+                
+                <a class="popup-close" data-popup-close="edit-profile" href="#">x</a>
+            </div>
+        </div> 
+        
+        <!-- CHANGE PASSWORD POPUP -->
+        <div class="popup" data-popup="change-password">
+            <div class="popup-inner card-panel">
+                <h5>Change Password</h5>
+                
+                <form name='change-password' method='post'>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input id="password" type="password" name='password' class="validate" required>
+                          <label for="password">Password</label>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name='change-pass-pop'>
+                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
+                            
+                </form>
+                
+                <a class="popup-close" data-popup-close="change-password" href="#">x</a>
+            </div>
+        </div> 
         
                
   
@@ -249,19 +322,19 @@
                 
                 //------ ESCAPE KEY PRESS 
                 // These features to be added later
-                /*$(document).keyup(function(e) {
-                    if (e.keyCode == 27) 
-                    {
-                        var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
-                        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-                    }
-                });
-
-                //------ CLICK ANYWHERE ELSE
-                $('.popup').click(function(){
-                    var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
-                    $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);    
-                })*/
+//                $(document).keyup(function(e) {
+//                    if (e.keyCode == 27) 
+//                    {
+//                        var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
+//                        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+//                    }
+//                });
+//
+//                //------ CLICK ANYWHERE ELSE
+//                $('.popup').click(function(){
+//                    var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
+//                    $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);    
+//                })
 
 
             });

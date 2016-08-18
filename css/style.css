@@ -35,6 +35,10 @@ body{
     color : #88291f;
 }
 
+#username{
+    text-transform: capitalize;
+}
+
 /*------------HEADER NAV SECTION---------------*/
 
 nav {

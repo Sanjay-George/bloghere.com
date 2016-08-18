@@ -1,7 +1,7 @@
 /*     BASE COLOR  : #c0392b   */
 
 body{
-    font-size : 18px;
+    font-size : 16px;
     background : linear-gradient(#c0392b,#88291f 40%,#000 45%,#000 70%);
     height:100vh;
     background-position: center;
@@ -251,7 +251,7 @@ main .container{
     background:rgba(0,0,0,1);
     text-decoration:none;
 }
-/*----------EDIT BLOG POPUP--------------------*/
-#edit-blog textarea{
-    font-size : 100%;
+/*--------------EDIT PROFILE POPUP------------*/
+#country{
+    text-transform: uppercase;
 }
