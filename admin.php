@@ -1,14 +1,33 @@
 <?php
     
     session_start();
+     $error = "";
+    $link = mysqli_connect('localhost','root','','bloghere');
 
     if (array_key_exists("id", $_COOKIE)){
         $_SESSION['id'] = $_COOKIE['id'];
     }
 
-    if (array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION) && $_SESSION['permission']==2){
+    if (array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION) && $_SESSION['permission']==2)
+    {
         // do other stuff on this page with the session variable
-        print_r($_SESSION);
+
+        // UPDATE PERMISSIONS PART
+        if (array_key_exists("submit", $_GET)){
+            print_r($_GET);  // comment this later
+            // setting all to 0
+            $query = "UPDATE `bloggers` SET permission=0 WHERE permission != 2";
+            mysqli_query($link, $query);
+            // setting to 1 those selected
+            foreach ($_GET as $key => $value){
+                if ($key != "submit"){
+                    $query = "UPDATE `bloggers` SET permission=1 WHERE blogger_id=".$key."";
+                    mysqli_query($link, $query);
+                }
+                
+            }
+            
+        }
     }
     else{
         header("Location: index.php");
@@ -25,6 +44,7 @@
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/blogger.css">
         <link rel="stylesheet" href="css/admin.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     </head>
 
     <body>
@@ -58,30 +78,53 @@
                      <div class='col l12'>
                          <h5> LIST OF BLOGGERS </h5>
                      
-                         <form name='permission' method="post" id='permission-form'>
-                            
+                         <form name='permission' method="get" id='permission-form'>
+                           <?php
+                                $query = "SELECT * FROM `bloggers` WHERE permission != 2";
+                                if ($result = mysqli_query($link , $query)){
+                                    while($row = mysqli_fetch_array($result)){
+
+                                        echo "<div class='col l8 offset-l2 card-panel z-depth-1 hoverable blogger-info'><div id='permission' class='col l12'><input type='checkbox' name='".$row['blogger_id']."' id='".$row['blogger_id']."'><label for='".$row['blogger_id']."'><span class='acc-user'>".$row['username']."</span></label><label for='".$row['blogger_id']."'><span class='acc-email'>".$row['email']."</span></label></div></div>";
+                                        
+                                        // set the checkbox to on if permission = 1
+                                    }
+                                }
+
+                            ?>
+                             
+<!--
                              <div class='col l8 offset-l2 card-panel z-depth-1 hoverable blogger-info'>
                                  <div id='permission' class='col l12'>
-                                      <input name='permission' type="checkbox" id='permission' >
-                                      <label for="acc-perm">
-                                          <p id='blogger-name'>Some name</p>
-                                          <p id='blogger-username'>Some name</p>
-                                      </label>
+                                 <input type='checkbox' name='$acc-perm-2' id='$acc-perm-2'>
+                                 <label for='$acc-perm-2'><span class='acc-user'>$Name of the person</span></label>        
+                                 <label for='$acc-perm-2'><span class='acc-email'>$email</span></label>                  
                                  </div> 
                              </div> 
+-->
+                       
+                            <div class='col l12 center update-btn'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Update permissions</button></div>      
                              
-                         </form>
-                        
-                        
-                         
+                             <div><h4><?php echo $error;?></h4></div>
+                             
+                        </form>
+                       
                      </div>
-                     
-                     <div class='col l12 center update-btn'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Update permissions</button></div>
-                 </div> 
-         
-                     
+                 </div>    
+                 
+                <?php
+                    $query = "SELECT blogger_id FROM `bloggers` WHERE permission=1";
+                    $result = mysqli_query($link, $query);
+                    if ($result){
+                        while ($row = mysqli_fetch_array($result)){
+                            $id = $row['blogger_id'];
+                            echo "<script type=text/javascript>$('#'+".$id.").prop('checked', true);</script>";
+                       
+                 
+                        }
+                    }
+                
+               ?>  
            </div>
-            
         </main>
         
         <!-- FLOATING ADD NEW BUTTON -->
@@ -90,23 +133,25 @@
         <!-- ALL POP UPS -->
             
         <!--  DELETE ACCOUNT POPUP-->
+<!--
         <div class="popup" data-popup="delete-account">
             <div class="popup-inner card-panel">
                 <h5>Delete Blog</h5>
                 <p>Are you sure you want to delete this blog ?</p>
 
-                <!-- ADD DELETE FUNCTIONALITY TO THIS BUTTON BELOW-->
+                 ADD DELETE FUNCTIONALITY TO THIS BUTTON BELOW
                 <a class='btn red-btn darken-4 z-depth-1 left' href="#">Delete</a>
 
                 <a class='btn white z-depth-1 black-btn left ' data-popup-close="delete-account" href="#">Cancel</a>
                 <a class="popup-close" data-popup-close="delete-account" href="#">x</a>
             </div>
         </div>       
+-->
   
     
      
      
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
         <script src="js/jquery.waypoints.min.js"></script>
         <script src="js/typed.js"></script>
@@ -117,8 +162,7 @@
             
            // WHEN DOC READY
             $(document).ready(function(){
-                // FOR SELECTING TABS
-                $('ul.tabs').tabs();
+                
             });
             
 //        /*-------------DELETE ACC POPUP -----------------*/

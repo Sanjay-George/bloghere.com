@@ -31,13 +31,19 @@
 //        header("Location: index.php");
 //    }
 
-$query = "SELECT * FROM `bloggers` WHERE permission != 2";
 
-
+if ($_POST['submit']){
+    print_r($_POST);
+}
 
 
 
 ?>
+
+<form method="post">
+    <input type="checkbox" name='12'>
+    <button name='submit' value="submit">Submit</button>
+</form>
 
 <!--
 <form name='login' method='post' id='login' class="col s12">
@@ -56,12 +62,15 @@ $query = "SELECT * FROM `bloggers` WHERE permission != 2";
     <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
 </form>-->
 
+<!--
 <?php
-    if ($result = mysqli_query($link , $query)){
-        while($row = mysqli_fetch_array($result)){
-            
-            echo "<div id='".$row['email']."'><h1>".$row['username']."</h1><h3>".$row['email']."</h3></div>";
-        }
-    }
-    
+//    $query = "SELECT * FROM `bloggers` WHERE permission != 2";
+//    if ($result = mysqli_query($link , $query)){
+//        while($row = mysqli_fetch_array($result)){
+//            
+//            echo "<div id='".$row['email']."'><h1>".$row['username']."</h1><h3>".$row['email']."</h3></div>";
+//        }
+//    }
+//    
 ?>
+-->

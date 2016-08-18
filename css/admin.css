@@ -33,3 +33,15 @@ body{
     margin-top : 40px;
     margin-bottom : 20px;
 }
+.acc-email{
+    font-size : 90%;
+    color : #6a6a6a;
+    font-style: italic;
+    padding-left:20px;
+    cursor : pointer;
+}
+.acc-user{
+    font-size : 80%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
