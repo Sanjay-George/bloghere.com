@@ -1,18 +1,39 @@
 <?php
     
+    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    if (mysqli_connect_error()){
+        die('Unable to connect to the database');
+    }
+   
     session_start();
 
     if (array_key_exists("id", $_COOKIE)){
         $_SESSION['id'] = $_COOKIE['id'];
     }
+    if (array_key_exists("permission", $_COOKIE)){
+        $_SESSION['permission'] = $_COOKIE['permission'];
+    }
+    print_r($_SESSION);
 
-    if (array_key_exists("id", $_SESSION)){
-        echo 'HI there';  
-        // do other stuff on this page with the session variable
+    if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
+        
+        // CODE FOR FUNCTIONS ON THIS PAGE
+        $id = $_SESSION['id'];
+        $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
+        $result = mysqli_query($link, $query);
+        $row = mysqli_fetch_array($result);
+       
+        
+    }
+    else if(array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION)) {
+        header("Location: admin.php");
     }
     else{
         header("Location: index.php");
     }
+   
+    
+    
 
 ?>
 
@@ -50,9 +71,9 @@
                <div class='row profile-header '>
                    <div class='col l12  card-panel z-depth-0 valign-wrapper'>
                        <div id='profile-info' class='col l12'>
-                           <h1>Dan Brown</h1>
-                           <h3>danbrown@email.com</h3>
-                           <h4>Germany</h4>
+                           <h1><?php echo $row['username'];?></h1>
+                           <h3><?php echo $row['email'];?></h3>
+                           <h4><?php echo $row['country'];?></h4>
                        </div>
 
                    </div>

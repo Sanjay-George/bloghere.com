@@ -14,7 +14,9 @@
     if (array_key_exists("logout", $_GET)){
         session_unset();
         setcookie("id", "", time()-60*60*24);
+        setcookie("permission", "", time()-60*60*24);
         $_COOKIE["id"] = "";
+        $_COOKIE["permission"] = "";
     }
     else if((array_key_exists('id', $_SESSION)  || array_key_exists('id', $_COOKIE)) && $_GET['loggedin'] != 1 ) {
         header('Location: blogger.php');
@@ -22,13 +24,13 @@
     
     
 
-    // SIGN UP SECTION 
-    if (array_key_exists('signup', $_POST)){
+    // SIGNUP/LOGIN SECTION 
+    if (array_key_exists('submit', $_POST)){
 
         if (!$_POST['email']){
             $error = "One or more fields are empty";
         }
-        if (!$_POST['username']){
+        if (!$_POST['username'] && $_POST['login']==0){
             $error = "One or more fields are empty";
         }
         if (!$_POST['password']){
@@ -39,37 +41,84 @@
             
         }
         else{
-            // check if email is taken DB access required
-            $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
             
-            $result = mysqli_query($link, $query);
-            
-            if (mysqli_num_rows($result) != 0){
-                $error = "Email id already taken";
-            } else{
-                // INSERT ALL VALUES INTO DB
-                $query = "INSERT INTO `bloggers` (`username`, `email`, `password`) values ( '".mysqli_real_escape_string($link, $_POST['username'])."', '".mysqli_real_escape_string($link, $_POST['email'])."', '".mysqli_real_escape_string($link, $_POST['password'])."')";
+            if ( $_POST['login'] == 1){
+                // LOGIN SECTION HERE
+//                print_r($_POST);
                 
-                if (!mysqli_query($link, $query)){
-                    $error = "Sign up failed ! Please try again later.";
+                // search for the email , retrive id, hash it and compare
+                // if success, set the cookie and session
+                
+                $query = "SELECT * FROM `bloggers` WHERE email = '".mysqli_real_escape_string($link, $_POST['email'])."' LIMIT 1";
+                $result = mysqli_query($link, $query);
+                $row = mysqli_fetch_array($result);
+                
+                if (array_key_exists("blogger_id", $row)){
+                    // do something
+                    $hashedpassword = md5(md5($row['blogger_id']).$_POST['password']);
+                    
+                    if ($hashedpassword == $row['password']){
+                        // valid
+                        $id = $row['blogger_id'];
+                        $_SESSION["id"] = $id;
+                        setcookie("id", $id, time() + 60*60*24*15);
+                        
+                        if ($row['permission'] == 2){
+                            //admin
+                            $_SESSION["permission"] = 2;
+                            setcookie("permission", 2, time() + 60*60*24*15);
+                            header("Location: admin.php"); 
+                        }
+                        else{
+                            header("Location: blogger.php"); 
+                        }
+                        
+                    }else{
+                        $error = 'Invalid email/password';
+                       
+                    }
                 }
                 else{
-                    $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
-                    $result = mysqli_query($link, $query);
-                    $row = mysqli_fetch_array($result);
-                    $id = $row['blogger_id'];
-                    
-                    //HASH PASSWORD
-                    $query = "UPDATE `bloggers` SET password= '".md5(md5($id).$_POST['password'])."' WHERE blogger_id =".$id." LIMIT 1";
-                    mysqli_query($link, $query);
-                    
-                    //setting cookie and session
-                    $_SESSION["id"] = $id;
-                    setcookie("id", $id, time() + 60*60*24*15);
-
-                    header("Location: blogger.php"); 
-                    
+                    $error = 'Invalid email/password';
                 }
+                
+            }
+            
+            else{
+                // SIGNUP SECTION HERE
+                // check if email is taken DB access required
+                $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
+
+                $result = mysqli_query($link, $query);
+
+                if (mysqli_num_rows($result) != 0){
+                    $error = "Email id already taken";
+                } else{
+                    // INSERT ALL VALUES INTO DB
+                    $query = "INSERT INTO `bloggers` (`username`, `email`, `password`) values ( '".mysqli_real_escape_string($link, $_POST['username'])."', '".mysqli_real_escape_string($link, $_POST['email'])."', '".mysqli_real_escape_string($link, $_POST['password'])."')";
+
+                    if (!mysqli_query($link, $query)){
+                        $error = "Sign up failed ! Please try again later.";
+                    }
+                    else{
+                        $query = "SELECT blogger_id FROM `bloggers` WHERE email='".mysqli_real_escape_string($link, $_POST['email'])."'";
+                        $result = mysqli_query($link, $query);
+                        $row = mysqli_fetch_array($result);
+                        $id = $row['blogger_id'];
+
+                        //HASH PASSWORD
+                        $query = "UPDATE `bloggers` SET password= '".md5(md5($id).$_POST['password'])."' WHERE blogger_id =".$id." LIMIT 1";
+                        mysqli_query($link, $query);
+
+                        //setting cookie and session
+                        $_SESSION["id"] = $id;
+                        setcookie("id", $id, time() + 60*60*24*15);
+
+                        header("Location: blogger.php"); 
+
+                    }
+                }
+
             }
             
         }
@@ -138,7 +187,10 @@
                                   <label for="password">Password</label>
                                 </div>
                               </div>
-                                <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
+                            <input type="hidden" name='login' value='1'>
+                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
+                            
+                            <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                         </div>    
                     </div>
@@ -164,7 +216,8 @@
                                   <label for="password">Password</label>
                                 </div>
                               </div>
-                              <div class='col l12 center'><button name='signup' class="waves-effect waves-light btn z-depth-2 black-btn">Sign Up</button></div>
+                              <input type="hidden" name='login' value='0'>
+                              <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Sign Up</button></div>
                               
                               <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
@@ -398,12 +451,7 @@
                 }, 1500);
             });
             
-            
-            
-            
-            
-           
-
+    
       </script>
      
     </body>

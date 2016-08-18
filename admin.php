@@ -1,3 +1,21 @@
+<?php
+    
+    session_start();
+
+    if (array_key_exists("id", $_COOKIE)){
+        $_SESSION['id'] = $_COOKIE['id'];
+    }
+
+    if (array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION) && $_SESSION['permission']==2){
+        // do other stuff on this page with the session variable
+        print_r($_SESSION);
+    }
+    else{
+        header("Location: index.php");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,25 +58,25 @@
                      <div class='col l12'>
                          <h5> LIST OF BLOGGERS </h5>
                      
-                         <div class='col l8 offset-l2 card-panel z-depth-1 hoverable blogger-info'>
-                             <div id='permission' class='col l12'>
-                                  <input type="checkbox" id='acc-perm' >
-                                  <label for="acc-perm">Name of the blogger</label>
+                         <form name='permission' method="post" id='permission-form'>
+                            
+                             <div class='col l8 offset-l2 card-panel z-depth-1 hoverable blogger-info'>
+                                 <div id='permission' class='col l12'>
+                                      <input name='permission' type="checkbox" id='permission' >
+                                      <label for="acc-perm">
+                                          <p id='blogger-name'>Some name</p>
+                                          <p id='blogger-username'>Some name</p>
+                                      </label>
+                                 </div> 
                              </div> 
-                               
-                         </div>
-                        <div class='col l8 offset-l2 card-panel z-depth-1 hoverable blogger-info'>
-                             <div id='permission' class='col l12'>
-                                  <input type="checkbox" id='acc-perm' >
-                                  <label for="acc-perm">Name of the blogger</label>
-                             </div> 
-                               
-                         </div>
+                             
+                         </form>
+                        
                         
                          
                      </div>
                      
-                     <div class='col l12 center update-btn'><a class="waves-effect waves-light btn z-depth-1 red-btn hoverable">Update Permissions</a></div>
+                     <div class='col l12 center update-btn'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Update permissions</button></div>
                  </div> 
          
                      

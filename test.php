@@ -1,6 +1,6 @@
 
 <?php
-//    $link = mysqli_connect('localhost','root','','bloghere');
+    $link = mysqli_connect('localhost','root','','bloghere');
 //
 //    if (mysqli_connect_error()){
 //        die('Unable to connect to the database');
@@ -17,22 +17,29 @@
 //        echo 'success';
 //    }
 
-    session_start();
+//    session_start();
+//
+//    print_r($_SESSION);
+//    print_r($_COOKIE);
+//    if (array_key_exists("id", $_COOKIE)){
+//        $_SESSION["id"] =  $_COOKIE["id"];        
+//    }
+//print_r($_SESSION);
+//    if (array_key_exists("id", $_SESSION)){
+//        echo "You are logged in";
+//    }else{
+//        header("Location: index.php");
+//    }
 
-    print_r($_SESSION);
-    print_r($_COOKIE);
-    if (array_key_exists("id", $_COOKIE)){
-        $_SESSION["id"] =  $_COOKIE["id"];        
-    }
-print_r($_SESSION);
-    if (array_key_exists("id", $_SESSION)){
-        echo "You are logged in";
-    }else{
-        header("Location: index.php");
-    }
+$query = "SELECT * FROM `bloggers` WHERE permission != 2";
+
+
+
+
 
 ?>
 
+<!--
 <form name='login' method='post' id='login' class="col s12">
  <div class="row">
     <div class="input-field col s12">
@@ -47,4 +54,14 @@ print_r($_SESSION);
     </div>
   </div>
     <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
-</form>
+</form>-->
+
+<?php
+    if ($result = mysqli_query($link , $query)){
+        while($row = mysqli_fetch_array($result)){
+            
+            echo "<div id='".$row['email']."'><h1>".$row['username']."</h1><h3>".$row['email']."</h3></div>";
+        }
+    }
+    
+?>
