@@ -13,13 +13,13 @@
         // do other stuff on this page with the session variable
 
         // UPDATE PERMISSIONS PART
-        if (array_key_exists("submit", $_GET)){
-            print_r($_GET);  // comment this later
+        if (array_key_exists("submit", $_POST)){
+//            print_r($_POST);  // comment this later
             // setting all to 0
             $query = "UPDATE `bloggers` SET permission=0 WHERE permission != 2";
             mysqli_query($link, $query);
             // setting to 1 those selected
-            foreach ($_GET as $key => $value){
+            foreach ($_POST as $key => $value){
                 if ($key != "submit"){
                     $query = "UPDATE `bloggers` SET permission=1 WHERE blogger_id=".$key."";
                     mysqli_query($link, $query);
@@ -78,7 +78,7 @@
                      <div class='col l12'>
                          <h5> LIST OF BLOGGERS </h5>
                      
-                         <form name='permission' method="get" id='permission-form'>
+                         <form name='permission' method="post" id='permission-form'>
                            <?php
                                 $query = "SELECT * FROM `bloggers` WHERE permission != 2";
                                 if ($result = mysqli_query($link , $query)){

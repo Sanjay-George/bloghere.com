@@ -1,55 +1,80 @@
 <?php
     
-    $link = mysqli_connect("localhost", "root", "", "bloghere");
-    if (mysqli_connect_error()){
-        die('Unable to connect to the database');
-    }
-   
-    session_start();
+//    $link = mysqli_connect("localhost", "root", "", "bloghere");
+//    if (mysqli_connect_error()){
+//        die('Unable to connect to the database');
+//    }
+//   
+//    session_start();
+//
+//    if (array_key_exists("id", $_COOKIE)){
+//        $_SESSION['id'] = $_COOKIE['id'];
+//    }
+//    if (array_key_exists("permission", $_COOKIE)){
+//        $_SESSION['permission'] = $_COOKIE['permission'];
+//    }
+//    print_r($_SESSION);
+//
+//    if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
+//        
+//        // CODE FOR FUNCTIONS ON THIS PAGE
+//        $id = $_SESSION['id'];
+//        $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
+//        $result = mysqli_query($link, $query);
+//        $row = mysqli_fetch_array($result);
+//        
+//        // ON ANY SUMBIT BUTTON CLICK
+//        if (array_key_exists("submit", $_POST)){
+//            print_r($_POST);
+//            // EDIT PROFILE POPUP
+//            if (array_key_exists('edit-prof-pop', $_POST)){
+//                $query = "UPDATE `bloggers` SET email='".$_POST['email']."', username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";
+//                mysqli_query($link, $query);
+//                header("Location: blogger.php");
+//            }
+//            // CHANGE PASSWORD POPUP
+//            if (array_key_exists('change-pass-pop', $_POST)){
+//                $query = "UPDATE `bloggers` SET password='".md5(md5($id).$_POST['password'])."' WHERE blogger_id = ".$id."";
+//                mysqli_query($link, $query);
+//                header("Location: blogger.php");
+//            }
+//        }
+//       
+//        
+//    }
+//    else if(array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION)) {
+//        header("Location: admin.php");
+//    }
+//    else{
+//        header("Location: index.php");
+//    }
+    
+    // there will be two cookies 
+    // one for blogger/admin id 
+    // one for the profile blogger id
+    // permission cookie not required
 
+
+    session_start();
+    
     if (array_key_exists("id", $_COOKIE)){
         $_SESSION['id'] = $_COOKIE['id'];
     }
-    if (array_key_exists("permission", $_COOKIE)){
-        $_SESSION['permission'] = $_COOKIE['permission'];
-    }
+//    if (array_key_exists("permission", $_COOKIE)){
+//        $_SESSION['permission'] = $_COOKIE['permission'];
+//    }
     print_r($_SESSION);
-
-    if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
-        // logged in as blogger
-        // CODE FOR FUNCTIONS ON THIS PAGE
-        $id = $_SESSION['id'];
-        $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
-        $result = mysqli_query($link, $query);
-        $row = mysqli_fetch_array($result);
-        
-        // ON ANY SUMBIT BUTTON CLICK
-        if (array_key_exists("submit", $_POST)){
-            print_r($_POST);
-            // EDIT PROFILE POPUP
-            if (array_key_exists('edit-prof-pop', $_POST)){
-                $query = "UPDATE `bloggers` SET username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";
-                mysqli_query($link, $query);
-                header("Location: blogger.php");
-            }
-            // CHANGE PASSWORD POPUP
-            if (array_key_exists('change-pass-pop', $_POST)){
-                $query = "UPDATE `bloggers` SET password='".md5(md5($id).$_POST['password'])."' WHERE blogger_id = ".$id."";
-                mysqli_query($link, $query);
-                header("Location: blogger.php");
-            }
-        }
-       
-        
-    }
-    else if(array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION)) {
-        // logged in as admin
-        header("Location: admin.php");
+    $loggedin = 0;
+    if (array_key_exists('id',$_SESSION)){
+        // logged in
+        echo "You are logged in bro";
+        $loggedin = 1;
     }
     else{
-        // not logged in at all
-        header("Location: index.php");
+        echo "You are not logged in bro";
+        $loggedin = 0;
     }
+    
    
     
     
@@ -76,12 +101,33 @@
               <a href="index.php?loggedin=1" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
-<!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->
-                <li class='waves-effect waves-light'><a href="index.php?logout=1">Log Out</a></li>
+                <li id='nav-sign-up' class='waves-effect waves-light'><a href="index.php">Sign Up</a></li>
+                <li id='nav-profile-page' class='waves-effect waves-light'><a href="blogger.php">Profile Page</a></li>
+                <li id='nav-log-out' class='waves-effect waves-light'><a href="index.php?logout=1">Log out</a></li>
               </ul>
             </div>
           </nav>
+            <?php
+                if ($loggedin == 0){
+                    // show sign up link and hide log out 
+            ?>  
+                <script>
+                    $('#nav-log-out').hide();
+                    $('#nav-profile-page').hide();
             
+                </script>
+            <?php               
+                }
+                else{
+                    // show log out and hide sign up
+            ?>
+               <script>
+                    $('#nav-sign-up').hide();
+                </script>
+            <?php
+                }
+            
+            ?>    
         </header>
         
         <main>
@@ -91,9 +137,9 @@
                <div class='row profile-header '>
                    <div class='col l12  card-panel z-depth-0 valign-wrapper'>
                        <div id='profile-info' class='col l12'>
-                           <h1><?php echo $row['username'];?></h1>
-                           <h3><?php echo $row['email'];?></h3>
-                           <h4><?php echo $row['country'];?></h4>
+                           <h1>Name</h1>
+                           <h3>Email</h3>
+                           <h4>Country</h4>
                        </div>
 
                    </div>
@@ -122,16 +168,6 @@
                         <h5 class='valign-wrapper'>
                             <span><a><i class="material-icons">thumb_down</i></a></span>
                             <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">edit</i></a></span>
-                           <span>edit</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a data-popup-open="delete-blog"><i class="material-icons">delete</i></a></span>
-                            <span>delete</span>
                         </h5>
                        </div>
                        <div class='col l12 blog-content'>
@@ -163,16 +199,6 @@
                             <span>10</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a href='edit.php'><i class="material-icons">edit</i></a></span>
-                           <span>edit</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a data-popup-open="delete-blog"><i class="material-icons">delete</i></a></span>
-                            <span>delete</span>
-                        </h5>
-                       </div>
                        <div class='col l12 blog-content'>
                            <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
                        </div>
@@ -187,89 +213,7 @@
         </main>
         
         
-        <!-- FLOATING PROFILE MENU BUTTONS -->
-        <div class="fixed-action-btn horizontal click-to-toggle " style="bottom: 45px; right: 24px;">
-            <a class="btn-floating btn-large red z-depth-5">
-              <i class="material-icons">menu</i>
-            </a>
-            <ul>
-                <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Edit Profile' data-popup-open="edit-profile"><i class="material-icons">edit</i></a></li>
-                <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Change Password' data-popup-open="change-password"><i class="material-icons">https</i></a></li>
-                <li><a href='addblog.php' class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Add Blog'><i class="material-icons">add</i></a></li>
-            </ul>
-          </div>
-        
-        <!-- ALL POP UPS -->
-            
-        <!--  DELETE BLOG POPUP-->
-        <div class="popup" data-popup="delete-blog">
-            <div class="popup-inner card-panel">
-                <h5>Delete Blog</h5>
-                <p>Are you sure you want to delete this blog ?</p>
-
-                <!-- ADD DELETE FUNCTIONALITY TO THIS BUTTON BELOW-->
-                <a class='btn red-btn darken-4 z-depth-1 left' href="#">Delete</a>
-
-                <a class='btn white z-depth-1 black-btn left ' data-popup-close="delete-blog" href="#">Cancel</a>
-                <a class="popup-close" data-popup-close="delete-blog" href="#">x</a>
-            </div>
-        </div> 
-        
-        <!-- EDIT PROFILE POPUP -->
-        <div class="popup" data-popup="edit-profile">
-            <div class="popup-inner card-panel">
-                <h5>Edit profile</h5>
-                
-                <form name='edit-profile' method='post'>
-                    <div class="row">
-                        <div class="input-field col s12">
-                          <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $row['username']; ?>'>
-                          <label for="username">Username</label>
-                        </div>
-                      </div>
-                     <div class="row">
-                        <div class="input-field col s12">
-                          <input id="email" type="email" name="email" class="validate" autocomplete="email" required value='<?php echo $row['email']; ?>' disabled>
-                          <label for="email">Email</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <input id="country" name='country' type="text" class="validate" autocomplete='name' value='<?php echo $row['country']; ?>'>
-                          <label for="country">Country</label>
-                        </div>
-                      </div>
-                    
-                    <input type="hidden" name='edit-prof-pop'>
-                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
-                            
-                </form>
-                
-                <a class="popup-close" data-popup-close="edit-profile" href="#">x</a>
-            </div>
-        </div> 
-        
-        <!-- CHANGE PASSWORD POPUP -->
-        <div class="popup" data-popup="change-password">
-            <div class="popup-inner card-panel">
-                <h5>Change Password</h5>
-                
-                <form name='change-password' method='post'>
-                    <div class="row">
-                        <div class="input-field col s12">
-                          <input id="password" type="password" name='password' class="validate" required>
-                          <label for="password">New Password</label>
-                        </div>
-                    </div>
-                    
-                    <input type="hidden" name='change-pass-pop'>
-                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
-                            
-                </form>
-                
-                <a class="popup-close" data-popup-close="change-password" href="#">x</a>
-            </div>
-        </div> 
+       
         
                
   

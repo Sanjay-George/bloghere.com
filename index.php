@@ -281,7 +281,7 @@
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
+                           <span><a href="profile.php">Total buttwad</a></span>
                         </h5>
                         <h5 class='valign-wrapper'>
                             <span><i class="material-icons">watch_later</i></span>
@@ -311,7 +311,7 @@
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
+                           <span><a href="profile.php">Total buttwad</a></span>
                         </h5>
                         <h5 class='valign-wrapper'>
                             <span><i class="material-icons">watch_later</i></span>
