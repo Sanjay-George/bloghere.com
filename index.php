@@ -26,7 +26,7 @@
 
     // SIGNUP/LOGIN SECTION 
     if (array_key_exists('submit', $_POST)){
-
+        
         if (!$_POST['email']){
             $error = "One or more fields are empty";
         }
@@ -44,7 +44,7 @@
             
             if ( $_POST['login'] == 1){
                 // LOGIN SECTION HERE
-//                print_r($_POST);
+
                 
                 // search for the email , retrive id, hash it and compare
                 // if success, set the cookie and session
@@ -124,7 +124,12 @@
         }
     }
 
-    // LOGIN SECTION
+    // SEARCH FOR TOPIC SECTION
+    if (array_key_exists('search-btn', $_POST)){
+//        print_r($_POST);
+        // search for the related topic here
+        $topic = $_POST['search-query'];
+    }
     
 
 ?>
@@ -198,6 +203,7 @@
                     <div class="col s12 l8 offset-l2">
                         <div class="row">
                             <form method="post" name='signup' id='signup' class="col s12" novalidate>
+<!--                             do email validation in php-->
                               <div class="row">
                                 <div class="input-field col s12">
                                   <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $_POST['username']; ?>'>
@@ -272,119 +278,128 @@
             ?>
                
                <div id='best-blog' class= 'row best-blog section'>
-                    <div class='col l12'>
-                       <h3>the best ones</h3>
-                    </div>
-                    
-                    <div class='col l12 blog z-depth-1'>
-                       <h4>Name of the blog</h4>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a href="profile.php">Total buttwad</a></span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can. But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.
-                           But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.But then if someone just writes some crap then the admin will take away his rights to publish anything new as well will delete that particular blog.</p>
-                       </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
-                   </div> 
-                      
-                    
-                    <div class='col l12 blog red-theme z-depth-1'>
-                       <h4>Name of the blog</h4>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a href="profile.php">Total buttwad</a></span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
-                       </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
-                   </div>
+                <h3> the best ones</h3>
+                
+                <?php
+                   // FETCH BEST 3 BLOGS BASED ON NUMBER OF LIKES 
+                    $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE blogs.private != 1 AND blogs.blogger_id = bloggers.blogger_id LIMIT 3";
+                    if ($result = mysqli_query($link , $query)){
+                        while($row = mysqli_fetch_array($result)){
+
+                            // CHECKING PUBLIC OR NOT
+                            if ($row['private'] == 0){
+                            echo "
+                                <div class='col l12 blog z-depth-1'>
+                                   <h4>".$row['title']."</h4>
+                                   <div class='col l12 blog-info'>
+                                       <h5 class='valign-wrapper'>
+                                           <span><i class='material-icons'>person</i></span>
+                                           <span><a>".$row['username']."</a></span>
+                                        </h5>
+                                        <h5 class='valign-wrapper'>
+                                           <span><i class='material-icons'>subtitles</i></span>
+                                           <span>".$row['topic']."</span>
+                                        </h5>
+                                   </div>
+                                   <div class='col l12 blog-info'>
+                                        <h5 class='valign-wrapper'>
+                                           <span><a><i class='material-icons'>thumb_up</i></a></span>
+                                           <span>50</span>
+                                        </h5>
+                                        <h5 class='valign-wrapper'>
+                                            <span><a><i class='material-icons'>thumb_down</i></a></span>
+                                            <span>10</span>
+                                        </h5>
+                                   </div>
+                                   
+                                   <div class='col l12 blog-content'>
+                                       <p>".$row['content']."</p>
+                                   </div>
+                                   <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                               </div> ";
+                            }
+                           
+                        }
+                    }
+
+                ?>      
                    
                </div>
                     
-                <div class ='row search-blog section'>
+                <div id='search-blog' class ='row search-blog section'>
                    <!-- SEARCH BAR -->
                     <div class='col l12'>
-                        <form name='search' id='search' class="col s12">
+                        <form method='post' name='search' id='search' class="col s12">
                           <div class="col l8 offset-l2 valign-wrapper">
                                 <div class="input-field col l11">
-                                  <input id="search" class='autotype' type="text">
-                                  
+                                  <input name='search-query' id="search" class='autotype' type="text">
                                 </div>
-                                <div class='col l1 center'><a class="waves-effect waves-light btn z-depth-2 black"> <i class="material-icons">search</i></a></div>
+
+                                <div class='col l1 center'><button name='search-btn' class="waves-effect waves-light btn z-depth-2 black-btn"><i class="material-icons">search</i></button></div>
                           </div>
                         </form>   
                     </div> 
                     
-                    <!-- SEARCH RESULTS -->
-                    <div id='best-blog search-results' class= 'row best-blog section hide'>
-                     <div class='col l12 blog red-theme z-depth-1'>
-                       <h4>Name of the blog</h4>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a rethe fact that a beautiful mind cannot accept this but a total retard can.</p>
-                       </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">READ MORE</a></div>
-                   </div>  
-                  </div>
-               </div>
-               
-            
-           
-                
+                   <!-- SEARCH RESULTS -->
+                    <div id='best-blog' class= 'row best-blog section'>
+                     
+                     <?php
+                        print_r($_GET);
+                        if ($topic != ''){
+                            // FETCH BLOGS BASED ON TOPIC
+                            $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE  blogs.topic LIKE '%".$topic."%' AND blogs.blogger_id = bloggers.blogger_id";
+                            if ($result = mysqli_query($link , $query)){
+                                while($row = mysqli_fetch_array($result)){
+
+                                    // CHECKING PUBLIC OR NOT
+                                    if ($row['private'] == 0){
+                                    echo "
+                                        <div class='col l12 blog z-depth-1'>
+                                           <h4>".$row['title']."</h4>
+                                           <div class='col l12 blog-info'>
+                                               <h5 class='valign-wrapper'>
+                                                   <span><i class='material-icons'>person</i></span>
+                                                   <span><a>".$row['username']."</a></span>
+                                                </h5>
+                                                <h5 class='valign-wrapper'>
+                                                   <span><i class='material-icons'>subtitles</i></span>
+                                                   <span>".$row['topic']."</span>
+                                                </h5>
+                                           </div>
+                                           <div class='col l12 blog-info'>
+                                                <h5 class='valign-wrapper'>
+                                                   <span><a><i class='material-icons'>thumb_up</i></a></span>
+                                                   <span>50</span>
+                                                </h5>
+                                                <h5 class='valign-wrapper'>
+                                                    <span><a><i class='material-icons'>thumb_down</i></a></span>
+                                                    <span>10</span>
+                                                </h5>
+                                           </div>
+
+                                           <div class='col l12 blog-content'>
+                                               <p>".$row['content']."</p>
+                                           </div>
+                                           <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                                       </div> ";
+                                    }
+
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                        if ($_GET['loggedin']==1){
+                            header('Location: index.php?loggedin=1#search-blog');
+                        }
+                        else{
+                            header('Location: index.php#search-blog');
+                        }
+                    ?>
+                     
+                     
+                   </div>
                      
            </div>
             
@@ -416,6 +431,9 @@
             $(document).ready(function(){
                 // FOR SELECTING TABS
                 $('ul.tabs').tabs();
+                
+                // TO GIVE ALTERNATE RED AND BLACK THEMES TO BLOGS
+                $('#best-blog').children('div:odd').addClass('red-theme');
             });
             
             // TYPING EFFECT

@@ -27,6 +27,12 @@ body{
     border : 1px solid black;
     margin-top : 30px;
 }
+.form-error{
+    font-size : 90%;
+    font-style : italic;
+    margin-top : 20px;
+    color : #88291f;
+}
 
 /*------------HEADER NAV SECTION---------------*/
 
@@ -41,14 +47,17 @@ nav .nav-wrapper{
 }
 /*---------------MAIN SECTION-------------------*/
 
-main .container{
+main>.container{
     background-color : #f0f0f0;
     height : auto;
+    position: absolute;
+    left : 50%;
+    transform: translateX(-50%);
+    top : 20%;
     
 }
 /*-----------profile header section-----------*/
 .profile-header{
-    margin-top : 200px;
     margin-left : 0 !important;
     margin-right : 0 !important;
     border-bottom : 1px solid black;
@@ -255,3 +264,20 @@ main .container{
 #country{
     text-transform: uppercase;
 }
+
+/*------------ADD NEW BLOG SECTION-------------*/
+.add-blog h4{
+    font-size : 150%;
+    text-transform: uppercase;
+    margin-top : 50px;
+}
+
+.add-blog textarea{
+    font-size : 120%;
+}
+
+.add-blog #title{
+    text-transform: capitalize;
+}
+
+

@@ -15,48 +15,45 @@
     if (array_key_exists("permission", $_COOKIE)){
         $_SESSION['permission'] = $_COOKIE['permission'];
     }
-    print_r($_SESSION);
+//    print_r($_SESSION); // comment this
+//    print_r($_GET); // comment this
 
     if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
-        // check add blog permission
-        if ($_SESSION['add-blog-block'] == 1){
-           header('Location: blogger.php');
-        }
-        else{
-            // logged in as blogger
-            // CODE FOR FUNCTIONS ON THIS PAGE
-            $id = $_SESSION['id'];
-            $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
-            $result = mysqli_query($link, $query);
-            $row = mysqli_fetch_array($result);
+       
+        // logged in as blogger
+        // CODE FOR FUNCTIONS ON THIS PAGE
+        $blog_id = $_GET['bid'];
+        $query = "SELECT * FROM `blogs` WHERE blog_id =".$blog_id;
+        $result = mysqli_query($link, $query);
+        $row = mysqli_fetch_array($result);
+//        print_r($row);  //  comment this
 
-            // ON ANY SUMBIT BUTTON CLICK
-            if (array_key_exists("submit", $_POST)){
-                print_r($_POST);
+        // ON ANY SUMBIT BUTTON CLICK
+        if (array_key_exists("submit", $_POST)){
+            print_r($_POST);
 
-                // FOR ADDING NEW BLOG
-                if (!$_POST['title']){
-                    $error = "One or more fields are empty";
-                }
-                if (!$_POST['content']){
-                    $error = "One or more fields are empty";
-                }
-
-                if (!$_POST['topic']){
-                    $error = "One or more fields are empty";
-                }
-                if ($error != "")
-                {
-                }
-                else{
-
-                    $query = "INSERT INTO `blogs` (`blogger_id`, `title`, `content`, `topic`, `private`) VALUES (".$id.", '".mysqli_real_escape_string($link, $_POST['title'])."', '".$_POST['content']."', '".mysqli_real_escape_string($link, $_POST['topic'])."', '".mysqli_real_escape_string($link, $_POST['private'])."') ";
-
-                    mysqli_query($link, $query);
-                    header("Location: blogger.php");
-                }
-
+            // FOR ADDING NEW BLOG
+            if (!$_POST['title']){
+                $error = "One or more fields are empty";
             }
+            if (!$_POST['content']){
+                $error = "One or more fields are empty";
+            }
+
+            if (!$_POST['topic']){
+                $error = "One or more fields are empty";
+            }
+            if ($error != "")
+            {
+            }
+            else{
+
+                $query = "UPDATE `blogs` SET title='".$_POST['title']."', content='".$_POST['content']."', topic = '".$_POST['topic']."', private = ".$_POST['private']." WHERE blog_id=".$blog_id."";
+                
+                mysqli_query($link, $query);
+                header("Location: blogger.php");
+            }
+  
         }
    
     }
@@ -113,14 +110,14 @@
                             <form method="post" name='add-blog' id='add-blog' class="col s12 ">
                             <div class="row">
                                 <div class="input-field col s12">
-                                  <input name='title' id="title" type="text" length="50" autocomplete="off" value='<?php echo $_POST['title']; ?>'>
+                                  <input name='title' id="title" type="text" length="50" autocomplete="off" value='<?php echo $row['title']; ?>'>
                                   <label for="title">Blog Title</label>
                                 </div>
                             </div>
                               
                             <div class='row'>
                                 <div class="input-field col s7">
-                                    <select name='topic'>
+                                    <select name='topic' id='blog-topic'>
                                         <option value="" disabled selected>Choose a topic</option>
                                         <option value="art">Art</option>
                                         <option value="automobiles">Automobiles</option>
@@ -137,6 +134,8 @@
                                     </select>
                                     <label>Topic</label>
                                   </div>
+                                  
+                      
                                   <div class="input-field col s5">
                                     <select name='private'>
                                       <option value="" disabled >Select Privacy status</option>
@@ -149,12 +148,12 @@
                            
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea name='content' id="content" class="materialize-textarea"><?php echo $_POST['content']; ?></textarea>
+                                    <textarea name='content' id="content" class="materialize-textarea"><?php echo $row['content']; ?></textarea>
                                     <label for="content">Literally bloghere</label>
                                 </div>
                             </div>
                             
-                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Save Blog</button></div>
+                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Update Blog</button></div>
                             <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                         </div>    

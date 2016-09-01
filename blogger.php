@@ -22,6 +22,15 @@
         $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
         $result = mysqli_query($link, $query);
         $row = mysqli_fetch_array($result);
+        $name = $row['username'];
+        $country = $row['country'];
+        $email = $row['email'];
+        $permission = $row['permission'];
+        
+        // CHECKING IF PERMISSION TO ADD NEW BLOG
+        if ($permission == 0){
+            $_SESSION['add-blog-block'] = 1;
+        }
         
         // ON ANY SUMBIT BUTTON CLICK
         if (array_key_exists("submit", $_POST)){
@@ -100,84 +109,64 @@
                </div>
                
                <div id='all-blogs' class= 'row best-blog section'>
-                    
-                    
-                    <div class='col l12 blog z-depth-1'>
-                       <h4>Name of the blog</h4>
+               
+
+                  <?php
+                    $query = "SELECT * FROM `blogs` WHERE blogger_id=".$id."";
+                    if ($result = mysqli_query($link , $query)){
+                        while($row = mysqli_fetch_array($result)){
+                            
+                            // setting privacy terms
+                            if ($row['private'] == 0){
+                                $privacy = "public";
+                            }
+                            else{
+                                $privacy = "private";
+                            }
+                            echo "<div class='col l12 blog z-depth-1'>
+                       <h4>".$row['title']."</h4>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
+                           <span><i class='material-icons'>person</i></span>
+                           <span><a>".$name."</a></span>
                         </h5>
                         <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
+                            <span><i class='material-icons'>lock_outline</i></span>
+                            <span>".$privacy."</span>
                         </h5>
                        </div>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
+                           <span><a><i class='material-icons'>thumb_up</i></a></span>
                            <span>50</span>
                         </h5>
                         <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
+                            <span><a><i class='material-icons'>thumb_down</i></a></span>
                             <span>10</span>
                         </h5>
                        </div>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">edit</i></a></span>
+                           <span><a href='editblog.php?bid=".$row['blog_id']."'><i class='material-icons'>edit</i></a></span>
                            <span>edit</span>
                         </h5>
                         <h5 class='valign-wrapper'>
-                            <span><a data-popup-open="delete-blog"><i class="material-icons">delete</i></a></span>
+                            <span><a data-popup-open='delete-blog'><i class='material-icons'>delete</i></a></span>
                             <span>delete</span>
                         </h5>
                        </div>
                        <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. Therhis rights to publish anything new as well will delete thything new as well will delete that particular bl as well will delete that particular blog.</p>
+                           <p>".$row['content']."</p>
                        </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
-                   </div> 
-                      
-                    
-                    <div class='col l12 blog red-theme z-depth-1'>
-                       <h4>Name of the blog</h4>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a href='edit.php'><i class="material-icons">edit</i></a></span>
-                           <span>edit</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a data-popup-open="delete-blog"><i class="material-icons">delete</i></a></span>
-                            <span>delete</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
-                       </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
-                   </div>
+                       <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                   </div> ";
+
+                           
+                        }
+                    }
+
+                ?>   
+                
                    
                </div>
 
@@ -198,6 +187,8 @@
                 <li><a href='addblog.php' class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Add Blog'><i class="material-icons">add</i></a></li>
             </ul>
           </div>
+          
+        
         
         <!-- ALL POP UPS -->
             
@@ -223,19 +214,19 @@
                 <form name='edit-profile' method='post'>
                     <div class="row">
                         <div class="input-field col s12">
-                          <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $row['username']; ?>'>
+                          <input id="username" name='username' type="text" class="validate" autocomplete='name' required value='<?php echo $name; ?>'>
                           <label for="username">Username</label>
                         </div>
                       </div>
                      <div class="row">
                         <div class="input-field col s12">
-                          <input id="email" type="email" name="email" class="validate" autocomplete="email" required value='<?php echo $row['email']; ?>' disabled>
+                          <input id="email" type="email" name="email" class="validate" autocomplete="email" required value='<?php echo $email; ?>' disabled>
                           <label for="email">Email</label>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <input id="country" name='country' type="text" class="validate" autocomplete='name' value='<?php echo $row['country']; ?>'>
+                          <input id="country" name='country' type="text" class="validate" autocomplete='name' value='<?php echo $country; ?>'>
                           <label for="country">Country</label>
                         </div>
                       </div>
@@ -298,7 +289,13 @@
                 // FOR SELECTING TABS
                 $('ul.tabs').tabs();
                 $('.tooltipped').tooltip({delay: 50});
+                
+                // TO GIVE ALTERNATE RED AND BLACK THEMES TO BLOGS
+                $('#all-blogs').children('div:odd').addClass('red-theme');
             });
+            
+            
+            
             
         /*-------------COMMON FOR ALL POPUPS -----------------*/
 
