@@ -344,7 +344,7 @@
                     <div id='best-blog' class= 'row best-blog section'>
                      
                      <?php
-                        print_r($_GET);
+//                        print_r($_GET);
                         if ($topic != ''){
                             // FETCH BLOGS BASED ON TOPIC
                             $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE  blogs.topic LIKE '%".$topic."%' AND blogs.blogger_id = bloggers.blogger_id";
@@ -386,16 +386,11 @@
 
                                 }
                             }
-                            
+                             
                         }
                         
                         
-                        if ($_GET['loggedin']==1){
-                            header('Location: index.php?loggedin=1#search-blog');
-                        }
-                        else{
-                            header('Location: index.php#search-blog');
-                        }
+                        
                     ?>
                      
                      
@@ -422,9 +417,9 @@
                $(this).parents().siblings('.blog-content').toggleClass('expand');
                 
                 if ($(this).parents().siblings('.blog-content').hasClass('expand'))
-                    $(this).text("Collapse");
+                    $(this).text("Show Less");
                 else
-                    $(this).text("Read More");
+                    $(this).text("Show More");
             });
             
            // WHEN DOC READY
