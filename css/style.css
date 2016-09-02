@@ -238,6 +238,20 @@ main .container{
     font-size : 200%;
     color : #ada9a9;
 }
+.topics{
+    padding-top : 10px !important;
+    padding-bottom: 50px !important;
+}
+.topic-tag{
+    color : #7b241b;
+    cursor: pointer;
+    border : 1px solid #7b241b;
+    border-radius: 5px;
+    padding : 3px 15px;
+   
+    display: inline-block;
+     margin-top : 10px !important;
+}
 
 /*-----------typing effect css-------------------*/
 .typed-cursor{

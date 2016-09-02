@@ -342,7 +342,22 @@
                           </div>
                         </form>   
                     </div> 
-                    
+                    <div class='col l12'>
+                        <div class='col l8 offset-l2 topics center'>
+                            <span class='topic-tag'>Art</span>
+                            <span class='topic-tag'>Automobiles</span>
+                            <span class='topic-tag'>Career</span>
+                            <span class='topic-tag'>Environment</span>
+                            <span class='topic-tag'>Music</span>
+                            <span class='topic-tag'>Personal style</span>
+                            <span class='topic-tag'>Photography</span>
+                            <span class='topic-tag'>Physical fitness</span>
+                            <span class='topic-tag'>Religion</span>
+                            <span class='topic-tag'>Sports</span>
+                            <span class='topic-tag'>Technology</span>
+                            <span class='topic-tag'>Web Design</span>
+                        </div>
+                    </div>
                    <!-- SEARCH RESULTS -->
                     <div id='search-results' class= 'row best-blog section'>
                      
