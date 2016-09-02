@@ -19,6 +19,8 @@
         // logged in as blogger
         // CODE FOR FUNCTIONS ON THIS PAGE
         $id = $_SESSION['id'];
+        echo "<script>var likerId = ".$id."</script>"; // setting bloggerid in js also
+        
         $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
         $result = mysqli_query($link, $query);
         $row = mysqli_fetch_array($result);
@@ -113,8 +115,17 @@
 
                   <?php
                     $query = "SELECT * FROM `blogs` WHERE blogger_id=".$id."";
+                    
+                           
                     if ($result = mysqli_query($link , $query)){
                         while($row = mysqli_fetch_array($result)){
+                            
+                            
+                            // getting number of likes
+                            $like_query = "SELECT COUNT(liker_id) FROM `likes` WHERE blog_id = ".$row['blog_id']." ";
+                            $like_result = mysqli_query($link,$like_query);
+                            $likes = mysqli_fetch_array($like_result);
+
                             
                             // setting privacy terms
                             if ($row['private'] == 0){
@@ -135,24 +146,17 @@
                             <span>".$privacy."</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-info'>
+                       <div class='col l12 blog-info hide'>
                         <h5 class='valign-wrapper'>
-                           <span><a><i class='material-icons'>thumb_up</i></a></span>
-                           <span>50</span>
+                           <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
+                           <span>".$likes[0]."</span>
                         </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class='material-icons'>thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
+                        
                        </div>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><a href='editblog.php?bid=".$row['blog_id']."'><i class='material-icons'>edit</i></a></span>
                            <span>edit</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a data-popup-open='delete-blog'><i class='material-icons'>delete</i></a></span>
-                            <span>delete</span>
                         </h5>
                        </div>
                        <div class='col l12 blog-content'>
@@ -160,14 +164,15 @@
                        </div>
                        <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
                    </div> ";
-
-                           
+                                
+                        
+                            
                         }
                     }
 
                 ?>   
                 
-                   
+                
                </div>
 
                      
@@ -295,7 +300,47 @@
             });
             
             
-            
+            /*// FOR THE LIKE BUTTON  
+           $(".like-btn").click(function(){
+                //CHECK FROM DB IF LIKED , ADDCLASS LIKE 
+                
+               
+                if ($(this).hasClass('liked')){
+                    // already liked
+                    $(this).removeClass('liked');
+                    var likeCount = $(this).parent().siblings('span').text();
+                    likeCount = Number(likeCount);
+                    $(this).parent().siblings('span').text(likeCount-1);
+                    
+                    var likedBlogId = $(this).attr('data-blog-id');
+                    likedBlogId = Number(likedBlogId);
+                    
+                    // ajax
+                    $.ajax({
+                      method: "POST",
+                      url: "likeupdate.php",
+                      data: { blog_id: likedBlogId, blogger_id: likerId, like: 0 }
+                    });
+                }
+                else{
+                    // not liked 
+                    $(this).addClass('liked');
+                    var likeCount = $(this).parent().siblings('span').text();
+                    likeCount = Number(likeCount);
+                    $(this).parent().siblings('span').text(likeCount+1);
+                    
+                    var likedBlogId = $(this).attr('data-blog-id');
+                    likedBlogId = Number(likedBlogId);
+                    
+                    // ajax
+                    $.ajax({
+                      method: "POST",
+                      url: "likeupdate.php",
+                      data: { blog_id: likedBlogId, blogger_id: likerId, like: 1 }
+                    });
+                    
+                }
+           }); */
             
         /*-------------COMMON FOR ALL POPUPS -----------------*/
 

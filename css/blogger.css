@@ -33,7 +33,12 @@ body{
     margin-top : 20px;
     color : #88291f;
 }
-
+.liked{
+    color : #000 !important;
+}
+.red-theme .liked{
+    color : #88291f !important;
+}
 /*------------HEADER NAV SECTION---------------*/
 
 nav {

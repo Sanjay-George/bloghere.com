@@ -1,12 +1,13 @@
 <?php
-    
-//    $link = mysqli_connect("localhost", "root", "", "bloghere");
-//    if (mysqli_connect_error()){
-//        die('Unable to connect to the database');
-//    }
-//   
-//    session_start();
-//
+   
+//    error_reporting(0);
+    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    if (mysqli_connect_error()){
+        die('Unable to connect to the database');
+    }
+   
+    session_start();
+
 //    if (array_key_exists("id", $_COOKIE)){
 //        $_SESSION['id'] = $_COOKIE['id'];
 //    }
@@ -16,19 +17,30 @@
 //    print_r($_SESSION);
 //
 //    if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
-//        
+//        // logged in as blogger
 //        // CODE FOR FUNCTIONS ON THIS PAGE
 //        $id = $_SESSION['id'];
-//        $query = "SELECT * FROM `bloggers` WHERE blogger_id =".$id;
+//        echo "<script>var likerId = ".$id."</script>"; // setting bloggerid in js also
+//        
+//        $query = "SELECT * FROM `bloggers` WHERE uesrname =".$_GET['username'];
 //        $result = mysqli_query($link, $query);
 //        $row = mysqli_fetch_array($result);
+//        $name = $row['username'];
+//        $country = $row['country'];
+//        $email = $row['email'];
+//        $permission = $row['permission'];
+//        
+//        // CHECKING IF PERMISSION TO ADD NEW BLOG
+//        if ($permission == 0){
+//            $_SESSION['add-blog-block'] = 1;
+//        }
 //        
 //        // ON ANY SUMBIT BUTTON CLICK
 //        if (array_key_exists("submit", $_POST)){
 //            print_r($_POST);
 //            // EDIT PROFILE POPUP
 //            if (array_key_exists('edit-prof-pop', $_POST)){
-//                $query = "UPDATE `bloggers` SET email='".$_POST['email']."', username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";
+//                $query = "UPDATE `bloggers` SET username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";
 //                mysqli_query($link, $query);
 //                header("Location: blogger.php");
 //            }
@@ -43,38 +55,25 @@
 //        
 //    }
 //    else if(array_key_exists("id", $_SESSION) && array_key_exists("permission", $_SESSION)) {
+//        // logged in as admin
 //        header("Location: admin.php");
 //    }
 //    else{
+//        // not logged in at all
 //        header("Location: index.php");
 //    }
-    
-    // there will be two cookies 
-    // one for blogger/admin id 
-    // one for the profile blogger id
-    // permission cookie not required
 
+    print_r($_GET);
 
-    session_start();
-    
-    if (array_key_exists("id", $_COOKIE)){
-        $_SESSION['id'] = $_COOKIE['id'];
-    }
-//    if (array_key_exists("permission", $_COOKIE)){
-//        $_SESSION['permission'] = $_COOKIE['permission'];
-//    }
-    print_r($_SESSION);
-    $loggedin = 0;
-    if (array_key_exists('id',$_SESSION)){
-        // logged in
-        echo "You are logged in bro";
-        $loggedin = 1;
-    }
-    else{
-        echo "You are not logged in bro";
-        $loggedin = 0;
-    }
-    
+    $query = "SELECT * FROM `bloggers` WHERE username ='".$_GET['username']."' LIMIT 1";
+    $result = mysqli_query($link, $query);
+    $row = mysqli_fetch_array($result);
+    print_r($row);
+    $id = $row['blogger_id'];
+    $name = $row['username'];
+    $country = $row['country'];
+    $email = $row['email'];
+    $permission = $row['permission'];
    
     
     
@@ -101,33 +100,12 @@
               <a href="index.php?loggedin=1" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
-                <li id='nav-sign-up' class='waves-effect waves-light'><a href="index.php">Sign Up</a></li>
-                <li id='nav-profile-page' class='waves-effect waves-light'><a href="blogger.php">Profile Page</a></li>
-                <li id='nav-log-out' class='waves-effect waves-light'><a href="index.php?logout=1">Log out</a></li>
+<!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->
+<!--                <li id='nav-change-option' class='waves-effect waves-light'><a href="index.php?logout=1">Log Out</a></li>-->
               </ul>
             </div>
           </nav>
-            <?php
-                if ($loggedin == 0){
-                    // show sign up link and hide log out 
-            ?>  
-                <script>
-                    $('#nav-log-out').hide();
-                    $('#nav-profile-page').hide();
             
-                </script>
-            <?php               
-                }
-                else{
-                    // show log out and hide sign up
-            ?>
-               <script>
-                    $('#nav-sign-up').hide();
-                </script>
-            <?php
-                }
-            
-            ?>    
         </header>
         
         <main>
@@ -137,74 +115,72 @@
                <div class='row profile-header '>
                    <div class='col l12  card-panel z-depth-0 valign-wrapper'>
                        <div id='profile-info' class='col l12'>
-                           <h1>Name</h1>
-                           <h3>Email</h3>
-                           <h4>Country</h4>
+                           <h1><?php echo $row['username'];?></h1>
+                           <h3><?php echo $row['email'];?></h3>
+                           <h4><?php echo $row['country'];?></h4>
                        </div>
 
                    </div>
                </div>
                
                <div id='all-blogs' class= 'row best-blog section'>
+               
+
+                  <?php
+                    $query = "SELECT * FROM `blogs` WHERE blogger_id=".$id."";
                     
-                    
-                    <div class='col l12 blog z-depth-1'>
-                       <h4>Name of the blog</h4>
+                           
+                    if ($result = mysqli_query($link , $query)){
+                        while($row = mysqli_fetch_array($result)){
+                            
+                            
+                            // getting number of likes
+                            $like_query = "SELECT COUNT(liker_id) FROM `likes` WHERE blog_id = ".$row['blog_id']." ";
+                            $like_result = mysqli_query($link,$like_query);
+                            $likes = mysqli_fetch_array($like_result);
+
+                            
+                            // setting privacy terms
+                            if ($row['private'] == 0){
+                                $privacy = "public";
+                            }
+                            else{
+                                $privacy = "private";
+                            }
+                            echo "<div class='col l12 blog z-depth-1'>
+                       <h4>".$row['title']."</h4>
                        <div class='col l12 blog-info'>
                         <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
+                           <span><i class='material-icons'>person</i></span>
+                           <span><a>".$name."</a></span>
                         </h5>
                         <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
+                            <span><i class='material-icons'>lock_outline</i></span>
+                            <span>".$privacy."</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-info'>
+                       <div class='col l12 blog-info hide'>
                         <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
+                           <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
+                           <span>".$likes[0]."</span>
                         </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
+                        
                        </div>
+                       
                        <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. Therhis rights to publish anything new as well will delete thything new as well will delete that particular bl as well will delete that particular blog.</p>
+                           <p>".$row['content']."</p>
                        </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
-                   </div> 
-                      
-                    
-                    <div class='col l12 blog red-theme z-depth-1'>
-                       <h4>Name of the blog</h4>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><i class="material-icons">person</i></span>
-                           <span><a>Total buttwad</a></span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><i class="material-icons">watch_later</i></span>
-                            <span>22/07/2016</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-info'>
-                        <h5 class='valign-wrapper'>
-                           <span><a><i class="material-icons">thumb_up</i></a></span>
-                           <span>50</span>
-                        </h5>
-                        <h5 class='valign-wrapper'>
-                            <span><a><i class="material-icons">thumb_down</i></a></span>
-                            <span>10</span>
-                        </h5>
-                       </div>
-                       <div class='col l12 blog-content'>
-                           <p>This is the content of the blog. Show only for a few lines and give a read more option that expands the content.There is more to this content than meets the eye. There is also a method to hide this text until fully read. What makes this so good is the fact that a beautiful mind cannot accept this but a total retard can.</p>
-                       </div>
-                       <div class='col l12 center'><a class="waves-effect waves-light btn z-depth-2 read-more js-expand">Show more</a></div>
-                   </div>
-                   
+                       <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                   </div> ";
+                                
+                        
+                            
+                        }
+                    }
+
+                ?>   
+                
+                
                </div>
 
                      
@@ -213,7 +189,6 @@
         </main>
         
         
-       
         
                
   
@@ -242,7 +217,53 @@
                 // FOR SELECTING TABS
                 $('ul.tabs').tabs();
                 $('.tooltipped').tooltip({delay: 50});
+                
+                // TO GIVE ALTERNATE RED AND BLACK THEMES TO BLOGS
+                $('#all-blogs').children('div:odd').addClass('red-theme');
             });
+            
+            
+            /*// FOR THE LIKE BUTTON  
+           $(".like-btn").click(function(){
+                //CHECK FROM DB IF LIKED , ADDCLASS LIKE 
+                
+               
+                if ($(this).hasClass('liked')){
+                    // already liked
+                    $(this).removeClass('liked');
+                    var likeCount = $(this).parent().siblings('span').text();
+                    likeCount = Number(likeCount);
+                    $(this).parent().siblings('span').text(likeCount-1);
+                    
+                    var likedBlogId = $(this).attr('data-blog-id');
+                    likedBlogId = Number(likedBlogId);
+                    
+                    // ajax
+                    $.ajax({
+                      method: "POST",
+                      url: "likeupdate.php",
+                      data: { blog_id: likedBlogId, blogger_id: likerId, like: 0 }
+                    });
+                }
+                else{
+                    // not liked 
+                    $(this).addClass('liked');
+                    var likeCount = $(this).parent().siblings('span').text();
+                    likeCount = Number(likeCount);
+                    $(this).parent().siblings('span').text(likeCount+1);
+                    
+                    var likedBlogId = $(this).attr('data-blog-id');
+                    likedBlogId = Number(likedBlogId);
+                    
+                    // ajax
+                    $.ajax({
+                      method: "POST",
+                      url: "likeupdate.php",
+                      data: { blog_id: likedBlogId, blogger_id: likerId, like: 1 }
+                    });
+                    
+                }
+           }); */
             
         /*-------------COMMON FOR ALL POPUPS -----------------*/
 

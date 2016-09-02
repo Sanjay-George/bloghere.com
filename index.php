@@ -154,7 +154,7 @@
               <a href="#" class="brand-logo left">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="#">Login / Sign Up</a></li>
-                <li class='waves-effect waves-light'><a href="#">Contact Us</a></li>
+                <li class='waves-effect waves-light'><a href="contact.php">Contact Us</a></li>
               </ul>
             </div>
           </nav>
@@ -277,17 +277,23 @@
 
             ?>
                
-               <div id='best-blog' class= 'row best-blog section'>
+               <div id='best-blog' class= 'row best-blog section hide'>
                 <h3> the best ones</h3>
                 
                 <?php
                    // FETCH BEST 3 BLOGS BASED ON NUMBER OF LIKES 
-                    $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE blogs.private != 1 AND blogs.blogger_id = bloggers.blogger_id LIMIT 3";
+                    $query = "SELECT DISTINCT * FROM `blogs` INNER JOIN `bloggers` INNER JOIN `likes` WHERE blogs.private != 1 AND blogs.blogger_id = bloggers.blogger_id AND blogs.blog_id = likes.blog_id LIMIT 3";
                     if ($result = mysqli_query($link , $query)){
                         while($row = mysqli_fetch_array($result)){
 
                             // CHECKING PUBLIC OR NOT
                             if ($row['private'] == 0){
+                                
+//                             // getting number of likes
+//                            $like_query = "SELECT COUNT(liker_id) FROM `likes` WHERE blog_id = ".$row['blog_id']." ";
+//                            $like_result = mysqli_query($link,$like_query);
+//                            $likes = mysqli_fetch_array($like_result);    
+                                
                             echo "
                                 <div class='col l12 blog z-depth-1'>
                                    <h4>".$row['title']."</h4>
@@ -302,14 +308,11 @@
                                         </h5>
                                    </div>
                                    <div class='col l12 blog-info'>
-                                        <h5 class='valign-wrapper'>
-                                           <span><a><i class='material-icons'>thumb_up</i></a></span>
-                                           <span>50</span>
-                                        </h5>
-                                        <h5 class='valign-wrapper'>
-                                            <span><a><i class='material-icons'>thumb_down</i></a></span>
-                                            <span>10</span>
-                                        </h5>
+                                    <h5 class='valign-wrapper'>
+                                       <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
+                                       <span>".$likes[0]."</span>
+                                    </h5>
+
                                    </div>
                                    
                                    <div class='col l12 blog-content'>
@@ -341,13 +344,13 @@
                     </div> 
                     
                    <!-- SEARCH RESULTS -->
-                    <div id='best-blog' class= 'row best-blog section'>
+                    <div id='search-results' class= 'row best-blog section'>
                      
                      <?php
 //                        print_r($_GET);
                         if ($topic != ''){
                             // FETCH BLOGS BASED ON TOPIC
-                            $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE  blogs.topic LIKE '%".$topic."%' AND blogs.blogger_id = bloggers.blogger_id";
+                            $query = "SELECT * FROM `blogs` INNER JOIN `bloggers` WHERE  blogs.topic LIKE '".$topic."%' AND blogs.blogger_id = bloggers.blogger_id";
                             if ($result = mysqli_query($link , $query)){
                                 while($row = mysqli_fetch_array($result)){
 
@@ -359,21 +362,17 @@
                                            <div class='col l12 blog-info'>
                                                <h5 class='valign-wrapper'>
                                                    <span><i class='material-icons'>person</i></span>
-                                                   <span><a>".$row['username']."</a></span>
+                                                   <span><a href='profile.php?username=".$row['username']."'>".$row['username']."</a></span>
                                                 </h5>
                                                 <h5 class='valign-wrapper'>
                                                    <span><i class='material-icons'>subtitles</i></span>
                                                    <span>".$row['topic']."</span>
                                                 </h5>
                                            </div>
-                                           <div class='col l12 blog-info'>
+                                           <div class='col l12 blog-info hide'>
                                                 <h5 class='valign-wrapper'>
                                                    <span><a><i class='material-icons'>thumb_up</i></a></span>
                                                    <span>50</span>
-                                                </h5>
-                                                <h5 class='valign-wrapper'>
-                                                    <span><a><i class='material-icons'>thumb_down</i></a></span>
-                                                    <span>10</span>
                                                 </h5>
                                            </div>
 
@@ -429,6 +428,7 @@
                 
                 // TO GIVE ALTERNATE RED AND BLACK THEMES TO BLOGS
                 $('#best-blog').children('div:odd').addClass('red-theme');
+                $('#search-results').children('div:odd').addClass('red-theme');
             });
             
             // TYPING EFFECT
