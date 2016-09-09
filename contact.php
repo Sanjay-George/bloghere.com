@@ -32,6 +32,8 @@
             $query = "INSERT INTO `contact` (`email`, `message`) VALUES ('".$_POST['email']."', '".$_POST['message']."')";
             mysqli_query($link, $query);
             
+            header("Location: index.php");
+            
 
          
             
@@ -75,7 +77,7 @@
            <div class='container z-depth-5'>
            
                 <div id='login-form' class='row login section'>
-                    <h1 class='center'>Contact us </h1>
+                    <h1 class='center'>Trouble ? </h1>
                     <h3 class='center'>send us a line and we'll get in touch with you</h3>
                     
            

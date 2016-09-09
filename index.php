@@ -479,7 +479,14 @@
                 }, 1500);
             });
             
-    
+            // SET SEARCH TOPIC ON CLICKING TAGS
+            $('.topic-tag').click(function(){
+                var topic = $(this).text();
+                 $('.autotype').typed({
+                    strings : ['']
+                });
+                $('.autotype').val(topic);
+            });
       </script>
      
     </body>

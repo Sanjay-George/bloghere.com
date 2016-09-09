@@ -189,11 +189,11 @@
             <ul>
                 <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Edit Profile' data-popup-open="edit-profile"><i class="material-icons">edit</i></a></li>
                 <li><a class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Change Password' data-popup-open="change-password"><i class="material-icons">https</i></a></li>
-                <li><a href='addblog.php' class="btn-floating tooltipped z-depth-3" data-position='bottom' data-tooltip='Add Blog'><i class="material-icons">add</i></a></li>
+                <li><a href='addblog.php' class="btn-floating tooltipped z-depth-3 add-blog-btn" data-position='bottom' data-tooltip='Add Blog'><i class="material-icons">add</i></a></li>
             </ul>
           </div>
-          
         
+
         
         <!-- ALL POP UPS -->
             

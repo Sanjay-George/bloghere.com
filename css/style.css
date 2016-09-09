@@ -251,6 +251,11 @@ main .container{
    
     display: inline-block;
      margin-top : 10px !important;
+    transition: all .3s;
+}
+.topic-tag:hover{
+    background-color : #7b241b;
+    color : #fff;
 }
 
 /*-----------typing effect css-------------------*/

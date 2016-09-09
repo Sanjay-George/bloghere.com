@@ -47,10 +47,10 @@
             {
             }
             else{
-
-                $query = "UPDATE `blogs` SET title='".$_POST['title']."', content='".$_POST['content']."', topic = '".$_POST['topic']."', private = ".$_POST['private']." WHERE blog_id=".$blog_id."";
+               
+                $query = "UPDATE `blogs` SET `title`='".$_POST['title']."', `content`='".$_POST['content']."', `topic` = '".$_POST['topic']."', `private` = ".$_POST['private']." WHERE `blog_id` = '".$blog_id."'";
                 
-                mysqli_query($link, $query);
+                mysqli_query($link,$query);
                 header("Location: blogger.php");
             }
   
@@ -168,7 +168,6 @@
         <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
         <script src="materialize/js/materialize.min.js"></script>
         <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/typed.js"></script>
 
         <script>
             
