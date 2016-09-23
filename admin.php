@@ -2,7 +2,8 @@
     
     session_start();
      $error = "";
-    $link = mysqli_connect('localhost','root','','bloghere');
+//    $link = mysqli_connect('localhost','root','','bloghere');
+    $link = mysqli_connect("localhost", "cl20-bloghere", "2mU-qBFw-","cl20-bloghere");
 
     if (array_key_exists("id", $_COOKIE)){
         $_SESSION['id'] = $_COOKIE['id'];

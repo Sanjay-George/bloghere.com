@@ -1,6 +1,7 @@
 <?php
     
-    $link = mysqli_connect("localhost", "root", "", "bloghere");
+//    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    $link = mysqli_connect("localhost", "cl20-bloghere", "2mU-qBFw-","cl20-bloghere");
     if (mysqli_connect_error()){
         die('Unable to connect to the database');
     }
@@ -13,7 +14,7 @@
     if (array_key_exists("permission", $_COOKIE)){
         $_SESSION['permission'] = $_COOKIE['permission'];
     }
-    print_r($_SESSION);
+//    print_r($_SESSION);
 
     if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
         // logged in as blogger
@@ -36,7 +37,7 @@
         
         // ON ANY SUMBIT BUTTON CLICK
         if (array_key_exists("submit", $_POST)){
-            print_r($_POST);
+//            print_r($_POST);
             // EDIT PROFILE POPUP
             if (array_key_exists('edit-prof-pop', $_POST)){
                 $query = "UPDATE `bloggers` SET username='".$_POST['username']."', country='".$_POST['country']."' WHERE blogger_id = ".$id."";

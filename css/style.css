@@ -1,8 +1,12 @@
 /*     BASE COLOR  : #c0392b   */
 
+html{
+    max-width: 100vw !important;
+    overflow-x : hidden;
+}
 body{
     font-size : 16px;
-    background : linear-gradient(rgb(192, 57, 43),rgba(136, 41, 31, 0.87) 40%,rgba(0, 0, 0, 0.81) 45%,rgba(0, 0, 0, 0.79) 70%),url('../images/main-bg.jpg');
+   background : linear-gradient(rgb(192, 57, 43),rgba(136, 41, 31, 0.87) 40%,rgba(0, 0, 0, 0.81) 45%,rgba(0, 0, 0, 0.79) 70%),url('../images/main-bg.jpg');
     height:100vh;
     background-position: center;
     background-attachment: fixed;

@@ -4,7 +4,8 @@
 
     session_start();
 
-    $link = mysqli_connect("localhost", "root", "", "bloghere");
+//    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    $link = mysqli_connect("localhost", "cl20-bloghere", "2mU-qBFw-","cl20-bloghere");
     $error = "";
     if (mysqli_connect_error()){
         die('Unable to connect to the database');
@@ -32,7 +33,7 @@
             $query = "INSERT INTO `contact` (`email`, `message`) VALUES ('".$_POST['email']."', '".$_POST['message']."')";
             mysqli_query($link, $query);
             
-            header("Location: index.php");
+//            header("Location: index.php");
             
 
          

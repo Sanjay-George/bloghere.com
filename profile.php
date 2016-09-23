@@ -1,7 +1,8 @@
 <?php
    
 //    error_reporting(0);
-    $link = mysqli_connect("localhost", "root", "", "bloghere");
+//    $link = mysqli_connect("localhost", "root", "", "bloghere");
+    $link = mysqli_connect("localhost", "cl20-bloghere", "2mU-qBFw-","cl20-bloghere");
     if (mysqli_connect_error()){
         die('Unable to connect to the database');
     }
@@ -114,8 +115,8 @@
            <div class='container z-depth-5'>
            
                <div class='row profile-header '>
-                   <div class='col l12  card-panel z-depth-0 valign-wrapper'>
-                       <div id='profile-info' class='col l12'>
+                   <div class='col s12 l12  card-panel z-depth-0 valign-wrapper'>
+                       <div id='profile-info' class='col s12 l12'>
                            <h1><?php echo $row['username'];?></h1>
                            <h3><?php echo $row['email'];?></h3>
                            <h4><?php echo $row['country'];?></h4>
@@ -148,9 +149,9 @@
                             else{
                                 $privacy = "private";
                             }
-                            echo "<div class='col l12 blog z-depth-1'>
+                            echo "<div class='col s12 l12 blog z-depth-1'>
                        <h4>".$row['title']."</h4>
-                       <div class='col l12 blog-info'>
+                       <div class='col s12 l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><i class='material-icons'>person</i></span>
                            <span><a>".$name."</a></span>
@@ -160,7 +161,7 @@
                             <span>".$privacy."</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-info hide'>
+                       <div class='col s12 l12 blog-info hide'>
                         <h5 class='valign-wrapper'>
                            <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
                            <span>".$likes[0]."</span>
@@ -168,10 +169,10 @@
                         
                        </div>
                        
-                       <div class='col l12 blog-content'>
+                       <div class='col s12 l12 blog-content'>
                            <p>".$row['content']."</p>
                        </div>
-                       <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                       <div class='col s12 l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
                    </div> ";
                                 
                         

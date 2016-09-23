@@ -1,5 +1,6 @@
 /*     BASE COLOR  : #c0392b   */
 
+
 body{
     font-size : 16px;
    background : linear-gradient(rgb(192, 57, 43),rgba(136, 41, 31, 0.87) 40%,rgba(0, 0, 0, 0.81) 45%,rgba(0, 0, 0, 0.79) 70%),url('../images/main-bg.jpg');

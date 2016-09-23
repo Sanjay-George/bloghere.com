@@ -3,6 +3,9 @@
     body{
         font-size: 14px;
     } 
+    .container .row{
+        margin: 0 !important;
+    }
     .section {
         margin-bottom: 40px;
     }
@@ -19,7 +22,7 @@
         font-size : 90%;
     }
     .main-info{
-        padding:20px 30px;
+        padding:20px 15px;
     }
     .info-points{
         flex-wrap: wrap;
@@ -58,7 +61,10 @@
         padding : 15px 14px;
     }
     .best-blog{
-        padding : 20px 40px;
+        padding : 20px 10px;
+    }
+    #all-blogs.best-blog{
+        padding: 20px 10px;
     }
     .add-blog textarea{
         font-size : 90%;

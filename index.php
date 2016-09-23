@@ -5,7 +5,7 @@
     session_start();
 
 //    $link = mysqli_connect("localhost", "root", "", "bloghere"); 
-    $link = mysqli_connect("79.170.42.3", "cl20-bloghere", "2mU-qBFw-");
+    $link = mysqli_connect("localhost", "cl20-bloghere", "2mU-qBFw-","cl20-bloghere");
     $error = "";
     if (mysqli_connect_error()){
         die('Unable to connect to the database');
@@ -151,11 +151,11 @@
     <body>
         
         <header>
-           <nav class='z-depth-3'>
+           <nav class='z-depth-3 col s12'>
             <div class="nav-wrapper">
               <a href="#" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
-                <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="#">Login / Sign Up</a></li>
+                <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="#">home</a></li>
                 <li class='waves-effect waves-light'><a href="contact.php">Contact Us</a></li>
               </ul>
             </div>
@@ -337,11 +337,11 @@
                     <div class='col s12 m12 l12'>
                         <form method='post' name='search' id='search' class="col s12">
                           <div class="col s12 m10 offset-m1 l8 offset-l2 valign-wrapper">
-                                <div class="input-field col s10 m10 l11">
+                                <div class="input-field col s9 m10 l11">
                                   <input name='search-query' id="search" class='autotype' type="text">
                                 </div>
 
-                                <div class='col s2 m2 l1 center'><button name='search-btn' class="waves-effect waves-light btn z-depth-2 black-btn search-btn-small"><i class="material-icons">search</i></button></div>
+                                <div class='col s3 m2 l1 center'><button name='search-btn' class="waves-effect waves-light btn z-depth-2 black-btn search-btn-small"><i class="material-icons">search</i></button></div>
                           </div>
                         </form>   
                     </div> 
