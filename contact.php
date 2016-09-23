@@ -11,7 +11,7 @@
     }
 
    
-    print_r($_POST);
+//    print_r($_POST);
     
 
     // SIGNUP/LOGIN SECTION 
@@ -54,6 +54,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style_queries.css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     </head>
     
@@ -62,7 +63,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="#" class="brand-logo left">bloghere.com</a>
+              <a href="#" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="index.php?loggedin=1">Home</a></li>
                 
@@ -99,9 +100,9 @@
                                 </div>
                             </div>
                             
-                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">send</button></div>
+                            <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">send</button></div>
                             
-                            <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
+                            <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                         </div>    
                     </div>

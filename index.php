@@ -4,7 +4,8 @@
 
     session_start();
 
-    $link = mysqli_connect("localhost", "root", "", "bloghere");
+//    $link = mysqli_connect("localhost", "root", "", "bloghere"); 
+    $link = mysqli_connect("79.170.42.3", "cl20-bloghere", "2mU-qBFw-");
     $error = "";
     if (mysqli_connect_error()){
         die('Unable to connect to the database');
@@ -143,6 +144,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style_queries.css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     </head>
     
@@ -151,7 +153,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="#" class="brand-logo left">bloghere.com</a>
+              <a href="#" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a id='nav-change-option' class='js-scrollto-login' href="#">Login / Sign Up</a></li>
                 <li class='waves-effect waves-light'><a href="contact.php">Contact Us</a></li>
@@ -177,7 +179,7 @@
                       </ul>
                     </div>
                     <!-- LOGIN -->
-                    <div class="col s12 l8 offset-l2">
+                    <div class="col s12 m12 l8 offset-l2">
                         <div class="row">
                             <form name='login' method='post' id='login' class="col s12">
                              <div class="row">
@@ -193,9 +195,9 @@
                                 </div>
                               </div>
                             <input type="hidden" name='login' value='1'>
-                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
+                            <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Login</button></div>
                             
-                            <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
+                            <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                         </div>    
                     </div>
@@ -223,9 +225,9 @@
                                 </div>
                               </div>
                               <input type="hidden" name='login' value='0'>
-                              <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Sign Up</button></div>
+                              <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Sign Up</button></div>
                               
-                              <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
+                              <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                     </div>
                 </div> 
@@ -234,21 +236,22 @@
     
                               
                <div  class='row main-info section'>
-                   <div class='col l12 info-points valign-wrapper'>
-                       <div class='col l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-2.jpg"></div>
-                       <div class='col l7'><h4>Blog on any topic</h4></div>
+                   <div class='col s12 m12 l12 info-points valign-wrapper'>
+                       <div class='col s12 l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-2.jpg"></div>
+                       <div class='col s12 l7'><h4>Blog on any topic</h4></div>
                    </div>
-                   <div class='col l12 info-points valign-wrapper'>
-                       <div class='col l7 right-align'><h4>Click on bloggers to see their blogs</h4></div>
-                       <div class='col l5 img-holder'><img class='responsive-img gray-filter' src="images/main-photo-3.jpg"> </div>
+                   <div class='col s12 m12 l12 info-points valign-wrapper'>
+                       <div class='col s12 m7 l7 right-align hide-on-small-only'><h4>Click on bloggers to see their blogs</h4></div>
+                       <div class='col s12 m5 l5 img-holder'><img class='responsive-img gray-filter' src="images/main-photo-3.jpg"> </div>
+                       <div class='col s12 l7 hide-on-med-and-up'><h4>Click on bloggers to see their blogs</h4></div>
                    </div>
-                    <div class='col l12 info-points valign-wrapper'>
-                       <div class='col l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-1.jpg"></div>
-                       <div class='col l7'><h4>Upvote your favourite blogs</h4></div>
+                    <div class='col s12 m12 l12 info-points valign-wrapper'>
+                       <div class='col s12 m5 l5 red-filter img-holder'><img class='responsive-img' src="images/main-photo-1.jpg"></div>
+                       <div class='col s12 m7 l7'><h4>Upvote your favourite blogs</h4></div>
                    </div>
-                   <div class='col l12 info-nav'>
+                   <div class='col s12 m12 l12 info-nav'>
                        <h3 class='center'>Get started now or browse for more </h3>
-                        <div class='col l12 center'>
+                        <div class='col s12 l12 center'>
                             <a class="js-scrollto-login waves-effect waves-light btn z-depth-1 red-btn hoverable">Wanna BLog</a>
                             <a id='js-scrollto-blogs' href='#best-blog' class="waves-effect waves-light btn z-depth-1 black-btn hoverable">Read blogs</a>
                         </div>
@@ -282,48 +285,48 @@
                 
                 <?php
                    // FETCH BEST 3 BLOGS BASED ON NUMBER OF LIKES 
-                    $query = "SELECT DISTINCT * FROM `blogs` INNER JOIN `bloggers` INNER JOIN `likes` WHERE blogs.private != 1 AND blogs.blogger_id = bloggers.blogger_id AND blogs.blog_id = likes.blog_id LIMIT 3";
-                    if ($result = mysqli_query($link , $query)){
-                        while($row = mysqli_fetch_array($result)){
-
-                            // CHECKING PUBLIC OR NOT
-                            if ($row['private'] == 0){
+//                    $query = "SELECT DISTINCT * FROM `blogs` INNER JOIN `bloggers` INNER JOIN `likes` WHERE blogs.private != 1 AND blogs.blogger_id = bloggers.blogger_id AND blogs.blog_id = likes.blog_id LIMIT 3";
+//                    if ($result = mysqli_query($link , $query)){
+//                        while($row = mysqli_fetch_array($result)){
+//
+//                            // CHECKING PUBLIC OR NOT
+//                            if ($row['private'] == 0){
                                 
 //                             // getting number of likes
 //                            $like_query = "SELECT COUNT(liker_id) FROM `likes` WHERE blog_id = ".$row['blog_id']." ";
 //                            $like_result = mysqli_query($link,$like_query);
 //                            $likes = mysqli_fetch_array($like_result);    
                                 
-                            echo "
-                                <div class='col l12 blog z-depth-1'>
-                                   <h4>".$row['title']."</h4>
-                                   <div class='col l12 blog-info'>
-                                       <h5 class='valign-wrapper'>
-                                           <span><i class='material-icons'>person</i></span>
-                                           <span><a>".$row['username']."</a></span>
-                                        </h5>
-                                        <h5 class='valign-wrapper'>
-                                           <span><i class='material-icons'>subtitles</i></span>
-                                           <span>".$row['topic']."</span>
-                                        </h5>
-                                   </div>
-                                   <div class='col l12 blog-info'>
-                                    <h5 class='valign-wrapper'>
-                                       <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
-                                       <span>".$likes[0]."</span>
-                                    </h5>
-
-                                   </div>
-                                   
-                                   <div class='col l12 blog-content'>
-                                       <p>".$row['content']."</p>
-                                   </div>
-                                   <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
-                               </div> ";
-                            }
-                           
-                        }
-                    }
+//                            echo "
+//                                <div class='col l12 blog z-depth-1'>
+//                                   <h4>".$row['title']."</h4>
+//                                   <div class='col l12 blog-info'>
+//                                       <h5 class='valign-wrapper'>
+//                                           <span><i class='material-icons'>person</i></span>
+//                                           <span><a>".$row['username']."</a></span>
+//                                        </h5>
+//                                        <h5 class='valign-wrapper'>
+//                                           <span><i class='material-icons'>subtitles</i></span>
+//                                           <span>".$row['topic']."</span>
+//                                        </h5>
+//                                   </div>
+//                                   <div class='col l12 blog-info'>
+//                                    <h5 class='valign-wrapper'>
+//                                       <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
+//                                       <span>".$likes[0]."</span>
+//                                    </h5>
+//
+//                                   </div>
+//                                   
+//                                   <div class='col l12 blog-content'>
+//                                       <p>".$row['content']."</p>
+//                                   </div>
+//                                   <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+//                               </div> ";
+//                            }
+//                           
+//                        }
+//                    }
 
                 ?>      
                    
@@ -331,14 +334,14 @@
                     
                 <div id='search-blog' class ='row search-blog section'>
                    <!-- SEARCH BAR -->
-                    <div class='col l12'>
+                    <div class='col s12 m12 l12'>
                         <form method='post' name='search' id='search' class="col s12">
-                          <div class="col l8 offset-l2 valign-wrapper">
-                                <div class="input-field col l11">
+                          <div class="col s12 m10 offset-m1 l8 offset-l2 valign-wrapper">
+                                <div class="input-field col s10 m10 l11">
                                   <input name='search-query' id="search" class='autotype' type="text">
                                 </div>
 
-                                <div class='col l1 center'><button name='search-btn' class="waves-effect waves-light btn z-depth-2 black-btn"><i class="material-icons">search</i></button></div>
+                                <div class='col s2 m2 l1 center'><button name='search-btn' class="waves-effect waves-light btn z-depth-2 black-btn search-btn-small"><i class="material-icons">search</i></button></div>
                           </div>
                         </form>   
                     </div> 
@@ -372,9 +375,9 @@
                                     // CHECKING PUBLIC OR NOT
                                     if ($row['private'] == 0){
                                     echo "
-                                        <div class='col l12 blog z-depth-1'>
+                                        <div class='col s12 l12 blog z-depth-1'>
                                            <h4>".$row['title']."</h4>
-                                           <div class='col l12 blog-info'>
+                                           <div class='col s12 l12 blog-info'>
                                                <h5 class='valign-wrapper'>
                                                    <span><i class='material-icons'>person</i></span>
                                                    <span><a href='profile.php?username=".$row['username']."'>".$row['username']."</a></span>
@@ -384,17 +387,17 @@
                                                    <span>".$row['topic']."</span>
                                                 </h5>
                                            </div>
-                                           <div class='col l12 blog-info hide'>
+                                           <div class='col s12 l12 blog-info hide'>
                                                 <h5 class='valign-wrapper'>
                                                    <span><a><i class='material-icons'>thumb_up</i></a></span>
                                                    <span>50</span>
                                                 </h5>
                                            </div>
 
-                                           <div class='col l12 blog-content'>
+                                           <div class='col s12 l12 blog-content'>
                                                <p>".$row['content']."</p>
                                            </div>
-                                           <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                                           <div class='col s12 l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
                                        </div> ";
                                     }
 
@@ -475,7 +478,7 @@
             
             $("#js-scrollto-blogs").click(function() {
                 $('html, body').animate({
-                    scrollTop: $("#best-blog").offset().top
+                    scrollTop: $("#search-blog").offset().top
                 }, 1500);
             });
             
@@ -487,6 +490,9 @@
                 });
                 $('.autotype').val(topic);
             });
+            
+            // PREVENT SCROLLING UP OF PAGE ON CLICKIHNG SEARCH
+            
       </script>
      
     </body>

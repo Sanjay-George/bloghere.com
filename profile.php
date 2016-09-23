@@ -63,12 +63,12 @@
 //        header("Location: index.php");
 //    }
 
-    print_r($_GET);
+//    print_r($_GET);
 
     $query = "SELECT * FROM `bloggers` WHERE username ='".$_GET['username']."' LIMIT 1";
     $result = mysqli_query($link, $query);
     $row = mysqli_fetch_array($result);
-    print_r($row);
+//    print_r($row);
     $id = $row['blogger_id'];
     $name = $row['username'];
     $country = $row['country'];
@@ -89,6 +89,7 @@
         <link rel="stylesheet" href="materialize/css/materialize.min.css">
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/blogger.css">
+        <link rel="stylesheet" href="css/style_queries.css">
         <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
     </head>
 
@@ -97,7 +98,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="index.php?loggedin=1" class="brand-logo left">bloghere.com</a>
+              <a href="index.php?loggedin=1" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
 <!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->

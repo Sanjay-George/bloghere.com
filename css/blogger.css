@@ -2,7 +2,7 @@
 
 body{
     font-size : 16px;
-    background : linear-gradient(#c0392b,#88291f 40%,#000 45%,#000 70%);
+   background : linear-gradient(rgb(192, 57, 43),rgba(136, 41, 31, 0.87) 40%,rgba(0, 0, 0, 0.81) 45%,rgba(0, 0, 0, 0.79) 70%),url('../images/main-bg.jpg');
     height:100vh;
     background-position: center;
     background-attachment: fixed;

@@ -76,6 +76,7 @@
         <link rel="stylesheet" href="materialize/css/materialize.min.css">
         <link rel='stylesheet' href="css/materialize_red_black_theme.css">
         <link rel="stylesheet" href="css/blogger.css">
+        <link rel="stylesheet" href="css/style_queries.css">
         <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
     </head>
 
@@ -84,7 +85,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="index.php?loggedin=1" class="brand-logo left">bloghere.com</a>
+              <a href="index.php?loggedin=1" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
 <!--                <li class='waves-effect waves-light'><a href="#">Sign Up</a></li>-->
@@ -100,8 +101,8 @@
            <div class='container z-depth-5'>
            
                <div class='row profile-header '>
-                   <div class='col l12  card-panel z-depth-0 valign-wrapper'>
-                       <div id='profile-info' class='col l12'>
+                   <div class='col s12 l12  card-panel z-depth-0 valign-wrapper'>
+                       <div id='profile-info' class='col s12 l12'>
                            <h1><?php echo $row['username'];?></h1>
                            <h3><?php echo $row['email'];?></h3>
                            <h4><?php echo $row['country'];?></h4>
@@ -134,9 +135,9 @@
                             else{
                                 $privacy = "private";
                             }
-                            echo "<div class='col l12 blog z-depth-1'>
+                            echo "<div class='col s12 l12 blog z-depth-1'>
                        <h4>".$row['title']."</h4>
-                       <div class='col l12 blog-info'>
+                       <div class='col s12 l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><i class='material-icons'>person</i></span>
                            <span><a>".$name."</a></span>
@@ -146,23 +147,23 @@
                             <span>".$privacy."</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-info hide'>
+                       <div class='col s12 l12 blog-info hide'>
                         <h5 class='valign-wrapper'>
                            <span><a class='like-btn' data-blog-id='".$row['blog_id']."'><i class='material-icons'>thumb_up</i></a></span>
                            <span>".$likes[0]."</span>
                         </h5>
                         
                        </div>
-                       <div class='col l12 blog-info'>
+                       <div class='col s12 l12 blog-info'>
                         <h5 class='valign-wrapper'>
                            <span><a href='editblog.php?bid=".$row['blog_id']."'><i class='material-icons'>edit</i></a></span>
                            <span>edit</span>
                         </h5>
                        </div>
-                       <div class='col l12 blog-content'>
+                       <div class='col s12 l12 blog-content'>
                            <p>".$row['content']."</p>
                        </div>
-                       <div class='col l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
+                       <div class='col s12 l12 center'><a class='waves-effect waves-light btn z-depth-2 read-more js-expand'>Show more</a></div>
                    </div> ";
                                 
                         
@@ -237,7 +238,7 @@
                       </div>
                     
                     <input type="hidden" name='edit-prof-pop'>
-                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
+                    <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
                             
                 </form>
                 
@@ -259,7 +260,7 @@
                     </div>
                     
                     <input type="hidden" name='change-pass-pop'>
-                    <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
+                    <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 black-btn">Update</button></div>
                             
                 </form>
                 

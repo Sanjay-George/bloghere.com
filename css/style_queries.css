@@ -1,0 +1,100 @@
+/*SMALL DEVICES*/
+@media screen and (max-width:600px){
+    body{
+        font-size: 14px;
+    } 
+    .section {
+        margin-bottom: 40px;
+    }
+    main .container{
+        top : 15%;
+    }
+    .form-error{
+        font-size : 85%;
+    }
+    .login h1{
+        font-size : 230%;
+    }
+    .login h3{
+        font-size : 90%;
+    }
+    .main-info{
+        padding:20px 30px;
+    }
+    .info-points{
+        flex-wrap: wrap;
+    }
+    .info-points img{
+        height: 180px !important;
+    }
+    .info-points .img-holder{
+        height: 180px !important;
+        margin-bottom : 7px;
+    }
+    .info-nav{
+        margin: 20px 0 10px 0;
+    }
+    .info-nav h3{
+        font-size : 210% ;
+    }
+    .info-nav .btn{
+        margin: 5px;
+    }
+    .search-blog input{
+        font-size : 130%;
+    }
+    .search-btn-small{
+        padding: 0 13px !important;
+    }
+    .topic-tag{
+        padding : 3px 7px;
+    }
+    /* for blogger.css */
+    .btn-floating{
+        bottom : -15px;
+        right : 4vw;
+    }
+    .profile-header .card-panel{
+        padding : 15px 14px;
+    }
+    .best-blog{
+        padding : 20px 40px;
+    }
+    .add-blog textarea{
+        font-size : 90%;
+    }
+}
+
+/*MEDIUM DEVICES*/
+@media screen and (min-width:601px) and (max-width:992px){
+    body{
+        font-size: 16px;
+    } 
+    .login h1{
+        font-size : 270%;
+    }
+    .login h3{
+        font-size : 100%;
+    }
+    .info-points img{
+        height: 150px !important;
+    }
+    .info-points .img-holder{
+        height: 150px !important;
+        margin-bottom : 7px;
+    }
+    .info-nav h3{
+        font-size : 220% ;
+    }
+    
+    /* for blogger.css */
+    .btn-floating{
+        bottom : 0px;
+        right : 10vw;
+    }
+}
+
+/*LARGE DEVICES*/
+@media screen and (min-width:993px) {
+    
+}

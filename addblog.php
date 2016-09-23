@@ -15,7 +15,7 @@
     if (array_key_exists("permission", $_COOKIE)){
         $_SESSION['permission'] = $_COOKIE['permission'];
     }
-    print_r($_SESSION);
+//    print_r($_SESSION);
 
     if (array_key_exists("id", $_SESSION) && !array_key_exists("permission", $_SESSION)){
         // check add blog permission
@@ -32,7 +32,7 @@
 
             // ON ANY SUMBIT BUTTON CLICK
             if (array_key_exists("submit", $_POST)){
-                print_r($_POST);
+//                print_r($_POST);
 
                 // FOR ADDING NEW BLOG
                 if (!$_POST['title']){
@@ -90,7 +90,7 @@
         <header>
            <nav class='z-depth-3'>
             <div class="nav-wrapper">
-              <a href="index.html" class="brand-logo left">bloghere.com</a>
+              <a href="index.html" class="brand-logo left hide-on-small-only">bloghere.com</a>
               <ul id="nav-mobile" class="right">
                 <li class='waves-effect waves-light'><a href="index.php?loggedin=1">Home</a></li>
                 <li class='waves-effect waves-light'><a href="blogger.php">Profile Page</a></li>
@@ -119,7 +119,7 @@
                             </div>
                               
                             <div class='row'>
-                                <div class="input-field col s7">
+                                <div class="input-field col s12 m7">
                                     <select name='topic'>
                                         <option value="" disabled selected>Choose a topic</option>
                                         <option value="art">Art</option>
@@ -137,7 +137,7 @@
                                     </select>
                                     <label>Topic</label>
                                   </div>
-                                  <div class="input-field col s5">
+                                  <div class="input-field col s12 m5">
                                     <select name='private'>
                                       <option value="" disabled >Select Privacy status</option>
                                         <option value="0" selected>Public</option>
@@ -154,8 +154,8 @@
                                 </div>
                             </div>
                             
-                            <div class='col l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Save Blog</button></div>
-                            <div class='col l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
+                            <div class='col s12 l12 center'><button name='submit' class="waves-effect waves-light btn z-depth-2 red-btn">Save Blog</button></div>
+                            <div class='col s12 l12 center'><p class='form-error center'><?php echo $error; ?></p></div>
                             </form>
                         </div>    
                     </div>
